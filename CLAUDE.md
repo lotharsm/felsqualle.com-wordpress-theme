@@ -121,18 +121,7 @@ Blog listings render **full `post-content`**, not excerpts — that is the text-
 
 ## Known issues
 
-From an initial review. Items 1, 2, 5 and 6 are fixed; 3 and 4 remain.
-
-3. **Reading measure mismatch.** `readme.txt` documents "46rem for prose, 1200px for wide content"; `theme.json` sets `contentSize` *and* `wideSize` to `1200px`. Prose runs full width and `alignwide` is a no-op. The previously decided fix — `"contentSize":"46rem"` on the `post-content` block's constrained layout in the templates — was tried and **reverted: it broke the layout**. Do not reapply that fix as-is; re-diagnose before touching this again.
-4. **`.is-style-summary` is inert.** `block-summary.json` sets only the 1em margins `style.css` already gives every `.wp-block-post-featured-image`. The previously decided fix — moving the 400px cap off the blanket rule onto `.is-style-summary` in `style.css` and `editor.css` — was tried alongside item 3 and **reverted: it broke the layout**. Do not reapply that fix as-is; re-diagnose before touching this again.
-
-Traps worth keeping, from fixing the rest:
-
-- **Block style variation CSS is per instance and comes from its own handle.** `block-style-variation-styles` is not a dependency of `felsqualle-style`, so print order against it is not guaranteed, and its selectors score 0,1,0. Duplicating a variation's properties in `style.css` silently defeats `dark.json` — that was the terminal bug.
-- **There is no `style-rtl.css`.** The CSS uses logical properties, so RTL needs no separate sheet; `[dir="rtl"]` covers the one genuinely directional rule (navigation arrows). theme.json's `border`/`padding` are physical only, which is why the quote rule and list indent live in `style.css`.
-- **An empty navigation menu does not render empty.** Core falls back to the most recent `wp_navigation` post, which resolves to `core/page-list` here — so an emptied menu shows every page. Setting `ref` does not avoid it; the check runs after the ref is resolved. Keep referenced menus non-empty.
-- **`wp_style_add_data( …, 'path', … )` never actually inlines here.** Block themes load ~22 separate core block stylesheets, each with a `path`; `wp_maybe_inline_styles()` sorts smallest-first and breaks once its 40 KB budget is gone, long before this 22 KB sheet. The call is kept to match the bundled themes, not because it fires.
-- **`core/post-date` with `displayType: modified` renders nothing** unless the modified date is strictly later than the publish date. It does not fall back to the publish date.
+None tracked. The current code is authoritative.
 
 ## Conventions
 
