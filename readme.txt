@@ -20,7 +20,7 @@ measure (46rem for prose, 1200px for wide content).
 
 Everything visual is defined in theme.json. style.css only carries the handful
 of rules theme.json cannot express — dotted heading underlines, table borders,
-the skip link, print and reduced-motion rules.
+print and reduced-motion rules.
 
 = Templates =
 
@@ -93,7 +93,7 @@ is how the original site works.
 
 == Accessibility ==
 
-* Skip link to the main landmark.
+* Skip link to the main landmark, rendered by core ahead of the first <main>.
 * Visible 2px focus ring on all interactive elements.
 * 44px minimum hit target on coarse pointers.
 * Text and link colours meet WCAG 2.1 AA against both backgrounds.
