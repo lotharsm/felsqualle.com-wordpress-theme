@@ -8,7 +8,7 @@ metadata:
 **All comments in source files must be brief** — one or two lines, explaining
 *why*. This holds in every file type: CSS, PHP, JSON, block-markup HTML, and
 file-header docblocks as much as inline notes. Commit messages are a single
-imperative line.
+imperative line unless ABSOLUTELY required for large changes.
 
 The code is the documentation. Do not restate what a rule does, recount how a
 bug was found, quote generated selectors that will drift, or narrate the
