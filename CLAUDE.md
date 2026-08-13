@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-See also [MEMORY.md](MEMORY.md) for live-environment facts, conventions, and implementation notes not carried here.
+See also [MEMORY.md](.claude/projects/felsqualle.com-wordpress-theme/memory/MEMORY.md) for live-environment facts, conventions, and implementation notes not carried here.
 
 ## What this is
 
