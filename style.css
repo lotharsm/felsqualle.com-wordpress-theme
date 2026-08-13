@@ -364,6 +364,16 @@ article.wp-block-group::after {
 	margin-right: auto !important;
 }
 
+/* The rules bracketing the featured image match its 400px box, so the pair
+   reads as one column. When there is no image neither selector matches, and
+   the doubled-separator rule below hides both instead. */
+.wp-block-post-template .wp-block-separator:has(+ .wp-block-post-featured-image),
+.wp-block-post-template .wp-block-post-featured-image + .wp-block-separator {
+	max-width: 400px;
+	margin-left: 0 !important;
+	margin-right: auto !important;
+}
+
 /* The navigation never collapses into an overlay — it wraps instead. */
 .wp-block-navigation__responsive-container-open,
 .wp-block-navigation__responsive-container-close {

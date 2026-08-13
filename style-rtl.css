@@ -54,3 +54,9 @@
 	margin-left: auto !important;
 	margin-right: 0 !important;
 }
+
+.wp-block-post-template .wp-block-separator:has(+ .wp-block-post-featured-image),
+.wp-block-post-template .wp-block-post-featured-image + .wp-block-separator {
+	margin-left: auto !important;
+	margin-right: 0 !important;
+}
