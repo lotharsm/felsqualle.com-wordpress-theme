@@ -1,3 +1,4 @@
 - [Brevity in comments and commits](brevity-in-comments-and-commits.md) — one-line commit messages, comments explain why in 1-3 lines
-- [Never push to remote](never-push-to-remote.md) — commit and stop; Lothar pushes himself
+- [Never push to remote](never-push-to-remote.md) — commit and stop; Lothar pushes himself, and don't count unpushed commits
 - [Header search button](header-search-button.md) — how the masthead's expanding search is built, and why each rule exists
+- [Felsqualle theme state](felsqualle-theme-state.md) — live site, open items, and what still can't be tested

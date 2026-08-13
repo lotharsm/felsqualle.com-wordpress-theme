@@ -51,9 +51,9 @@ Bumping the theme version in `style.css` also cache-busts the enqueued styleshee
 
 ### The core invariant
 
-**All visual styling belongs in `theme.json`. `style.css` carries only what theme.json cannot express.** This rule is held to consistently and is why `functions.php` stays under 80 lines. Before adding CSS, check whether theme.json has a property for it.
+**All visual styling belongs in `theme.json`. `style.css` carries only what theme.json cannot express.** This rule is held to consistently and is why `functions.php` is under 40 lines. Before adding CSS, check whether theme.json has a property for it.
 
-Things theme.json genuinely cannot express, and which therefore legitimately live in CSS: `text-decoration-style` (the dotted heading underlines), `outline`, `white-space`, `color-mix()` grounds, `:has()` conditionals, media queries, print rules.
+Things theme.json genuinely cannot express, and which therefore legitimately live in CSS: `text-decoration-style` (the dotted heading underlines), `outline`, `white-space`, `color-mix()` grounds, `:has()` conditionals, media queries, print rules, and **logical properties** — theme.json's `border` and `spacing.padding` take physical `top/right/bottom/left` only, which is why the quote rule and list indent are CSS.
 
 ### The three-surface mirroring obligation
 
@@ -115,6 +115,7 @@ Blog listings render **full `post-content`**, not excerpts — that is the text-
 - `query-pagination-numbers` sets `midSize: 99` so core renders every page link, then CSS collapses them to `1 2 … 98 99`. This avoids a PHP filter; `paginate_links` cannot produce two links at each end.
 - Navigation never collapses to an overlay — the toggle buttons are hidden and the menu wraps instead.
 - `functions.php` calls no `add_theme_support()`. Core's `_add_default_theme_supports()` runs at `after_setup_theme` priority 1 and covers block themes; `custom-logo` is inert for them, since the Site Logo block reads the `site_logo` option and `get_custom_logo()` has no support gate.
+- No `theme-color` meta. `style.css` declares `color-scheme` and paints the same base colours, so browsers derive their chrome from the page. Chrome on Android loses the exact tint; that was accepted.
 - Post meta shows the publish date only, which is what core's `post-date` does by default and what the bundled themes use. The modified date was tried and removed.
 - The separators bracketing a featured image are capped at the image's 400px, and hidden entirely when the post has no image.
 
@@ -130,6 +131,7 @@ Traps worth keeping, from fixing the rest:
 - **Block style variation CSS is per instance and comes from its own handle.** `block-style-variation-styles` is not a dependency of `felsqualle-style`, so print order against it is not guaranteed, and its selectors score 0,1,0. Duplicating a variation's properties in `style.css` silently defeats `dark.json` — that was the terminal bug.
 - **There is no `style-rtl.css`.** The CSS uses logical properties, so RTL needs no separate sheet; `[dir="rtl"]` covers the one genuinely directional rule (navigation arrows). theme.json's `border`/`padding` are physical only, which is why the quote rule and list indent live in `style.css`.
 - **An empty navigation menu does not render empty.** Core falls back to the most recent `wp_navigation` post, which resolves to `core/page-list` here — so an emptied menu shows every page. Setting `ref` does not avoid it; the check runs after the ref is resolved. Keep referenced menus non-empty.
+- **`wp_style_add_data( …, 'path', … )` never actually inlines here.** Block themes load ~22 separate core block stylesheets, each with a `path`; `wp_maybe_inline_styles()` sorts smallest-first and breaks once its 40 KB budget is gone, long before this 22 KB sheet. The call is kept to match the bundled themes, not because it fires.
 - **`core/post-date` with `displayType: modified` renders nothing** unless the modified date is strictly later than the publish date. It does not fall back to the publish date.
 
 ## Conventions
