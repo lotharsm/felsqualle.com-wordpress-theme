@@ -33,7 +33,10 @@ function felsqualle_setup() {
 add_action( 'after_setup_theme', 'felsqualle_setup' );
 
 /**
- * Front-end stylesheet. style-rtl.css is swapped in automatically when is_rtl().
+ * Front-end stylesheet. style-rtl.css is appended when is_rtl().
+ *
+ * `true`, not 'replace': 'replace' serves style-rtl.css INSTEAD OF style.css,
+ * which suits a full rtlcss mirror, not this short overrides file.
  */
 function felsqualle_enqueue_styles() {
 	// Depend on the core block library and global styles so this sheet is
@@ -44,7 +47,7 @@ function felsqualle_enqueue_styles() {
 		array( 'wp-block-library', 'global-styles' ),
 		wp_get_theme()->get( 'Version' )
 	);
-	wp_style_add_data( 'felsqualle-style', 'rtl', 'replace' );
+	wp_style_add_data( 'felsqualle-style', 'rtl', true );
 }
 add_action( 'wp_enqueue_scripts', 'felsqualle_enqueue_styles', 20 );
 
