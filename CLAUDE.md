@@ -115,6 +115,7 @@ Blog listings render **full `post-content`**, not excerpts — that is the text-
 - `body { margin: 0 }` plus `useRootPaddingAwareAlignments: false` is what lets the framed groups reach the viewport edge. The narrow-screen inset is re-added selectively in a `max-width: 600px` block.
 - `query-pagination-numbers` sets `midSize: 99` so core renders every page link, then CSS collapses them to `1 2 … 98 99`. This avoids a PHP filter; `paginate_links` cannot produce two links at each end.
 - Navigation never collapses to an overlay — the toggle buttons are hidden and the menu wraps instead.
+- `functions.php` calls no `add_theme_support()`. Core's `_add_default_theme_supports()` runs at `after_setup_theme` priority 1 and covers block themes; `custom-logo` is inert for them, since the Site Logo block reads the `site_logo` option and `get_custom_logo()` has no support gate.
 - Post meta shows the publish date only, which is what core's `post-date` does by default and what the bundled themes use. The modified date was tried and removed.
 - The separators bracketing a featured image are capped at the image's 400px, and hidden entirely when the post has no image.
 
