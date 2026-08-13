@@ -129,7 +129,7 @@ Two traps worth keeping, from fixing the rest:
 ## Conventions
 
 - Tabs for indentation, in CSS, PHP and JSON alike.
-- **Be brief.** Comments run one to three lines and explain *why* — the code says what it does. Where a rule exists to fight a specific core behaviour, name the behaviour and stop; preserve that reasoning when editing, since several rules look arbitrary without it. Don't restate a rule in prose, don't recount how a bug was found, and don't quote generated selectors that will drift.
+- **All comments are brief** — one or two lines, explaining *why*. Applies to every file type and to header docblocks as much as inline notes. Where a rule fights a specific core behaviour, name the behaviour and stop; preserve that reasoning when editing, since several rules look arbitrary without it. Never restate what a rule does, recount how a bug was found, or quote generated selectors that will drift. Where existing comments are long, tighten the ones you touch rather than matching them.
 - Commit messages are a single imperative line. Add a body only when the *why* genuinely will not fit, which is rare.
 - Every PHP file opens with an `ABSPATH` guard.
 - Functions are prefixed `felsqualle_`.
