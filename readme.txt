@@ -7,7 +7,7 @@ Requires PHP: 7.4
 Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Tags: blog, one-column, full-site-editing, block-patterns, block-styles, style-variations, editor-style, accessibility-ready, rtl-language-support, translation-ready
+Tags: blog, one-column, full-site-editing, block-styles, style-variations, editor-style, accessibility-ready, rtl-language-support, translation-ready
 
 A text-first block theme for technical writing, derived from felsqualle.com.
 
@@ -28,7 +28,7 @@ print and reduced-motion rules.
 * single — article, post meta, navigation, comments, latest posts
 * page
 * no-title — custom template, content only
-* style-guide — custom template, inserts the style guide pattern
+* style-guide — custom template, title and content without the frame
 * archive — category, tag and date archives
 * search
 * 404
@@ -39,12 +39,8 @@ header, footer, post-meta, sidebar
 
 = Patterns =
 
-felsqualle/logo-strip, felsqualle/faq, felsqualle/style-guide,
-felsqualle/site-search
-
-felsqualle/site-search is scoped to pages, so it appears in the pattern picker
-when you create one. Add a page titled "Site Search", insert it, and the page
-template supplies the frame, the title and the meta line.
+None. The theme ships no patterns of its own; use the ones bundled with
+WordPress from the pattern picker.
 
 = Style variations =
 

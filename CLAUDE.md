@@ -27,7 +27,7 @@ for f in theme.json styles/*.json; do
 done
 
 # Syntax-check PHP
-for f in functions.php patterns/*.php; do php -l "$f"; done
+php -l functions.php
 ```
 
 From the WordPress root (`../../../`):
@@ -100,7 +100,7 @@ Several partials are near-empty by design (`block-nowrap-first-column.json` has 
 
 - `templates/` — index, single, page, archive, search, 404, plus two custom templates declared in `theme.json` → `customTemplates` (`no-title`, `style-guide`).
 - `parts/` — header, footer, post-meta, sidebar. All four are declared in `theme.json` → `templateParts`; post-meta and sidebar use area `uncategorized`.
-- `patterns/` — four PHP patterns with WordPress header docblocks. Strings go through `esc_html__( ..., 'felsqualle' )`. `site-search.php` is scoped via `Post Types: page`.
+- No `patterns/` directory. The theme's four patterns were dropped in favour of the ones core ships; `functions.php` is now the only PHP file.
 - Text domain is `felsqualle`; the directory name is not. There is deliberately no `load_theme_textdomain()` call — WP loads translations just in time.
 
 Templates are near-duplicates of each other by necessity (block templates have no partials beyond template parts and no conditionals). The index/archive/search query loops are largely the same markup; changes to one usually need repeating in the others.
