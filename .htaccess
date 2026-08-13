@@ -1,0 +1,28 @@
+# The theme's git repository sits inside the web root, so .git/ is a URL path
+# as well as a directory. This host already denies it at the vhost level; these
+# rules travel with the theme. IfModule throughout, so a module this server
+# does not load means no rule rather than a 500.
+
+# mod_alias matches the whole URL-path, which is what reaches inside .git/ —
+# <FilesMatch> only ever sees basenames like "config" or "HEAD". 404 rather
+# than 403 so a scanner is not told it guessed right.
+<IfModule mod_alias.c>
+	RedirectMatch 404 (?i)/\.git(/|$)
+</IfModule>
+
+# Dotfiles in the theme itself: .gitignore, .editorconfig, a stray .env.
+<IfModule mod_authz_core.c>
+	<FilesMatch "^\.">
+		Require all denied
+	</FilesMatch>
+</IfModule>
+
+# Apache 2.2 spelling, nested so the two authz styles are never both active.
+<IfModule !mod_authz_core.c>
+	<IfModule mod_access_compat.c>
+		<FilesMatch "^\.">
+			Order allow,deny
+			Deny from all
+		</FilesMatch>
+	</IfModule>
+</IfModule>
