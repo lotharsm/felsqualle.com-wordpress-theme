@@ -1,9 +1,6 @@
 <?php
 /**
- * Felsqualle — theme functions.
- *
- * Deliberately small: everything visual lives in theme.json, the templates and
- * the /styles partials. Only three things genuinely need PHP — the editor
+ * Felsqualle — theme functions. Only three things need PHP: the editor
  * stylesheet, the front-end stylesheet and the theme-color meta.
  *
  * @package Felsqualle
@@ -15,9 +12,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * Theme setup. Core adds every other support a block theme uses at
- * after_setup_theme priority 1; translations load just in time, so there is
- * deliberately no load_theme_textdomain() call.
+ * Theme setup. Core adds every block-theme support at after_setup_theme
+ * priority 1, and translations load just in time — hence nothing else here.
  */
 function felsqualle_setup() {
 	add_editor_style( 'assets/css/editor.css' );
@@ -25,14 +21,12 @@ function felsqualle_setup() {
 add_action( 'after_setup_theme', 'felsqualle_setup' );
 
 /**
- * Front-end stylesheet. Core never enqueues style.css itself, block theme or not.
- *
- * `true`, not 'replace': 'replace' serves style-rtl.css INSTEAD OF style.css,
- * which suits a full rtlcss mirror, not this short overrides file.
+ * Front-end stylesheet; core never enqueues style.css itself. RTL is `true`,
+ * not 'replace', which would serve style-rtl.css instead of style.css.
  */
 function felsqualle_enqueue_styles() {
-	// Depend on the core block library and global styles so this sheet is
-	// printed after them and wins equal-specificity conflicts.
+	// Depend on the core block library and global styles to force print order,
+	// so this sheet wins equal-specificity conflicts.
 	wp_enqueue_style(
 		'felsqualle-style',
 		get_stylesheet_uri(),
@@ -48,8 +42,7 @@ add_action( 'wp_enqueue_scripts', 'felsqualle_enqueue_styles', 20 );
 /* Core's skip link is left hooked; unhooking it left WCAG 2.4.1 with no mechanism. */
 
 /**
- * Browser chrome colour, matching the source site's palette in both schemes.
- * WordPress has no native theme-color support.
+ * Browser chrome colour. WordPress has no native theme-color support.
  */
 function felsqualle_theme_color() {
 	echo '<meta name="theme-color" content="#f0f3f4" media="(prefers-color-scheme: light)" />' . "\n";
