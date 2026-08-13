@@ -28,7 +28,6 @@ print and reduced-motion rules.
 * single — article, post meta, navigation, comments, latest posts
 * page
 * no-title — custom template, content only
-* style-guide — custom template, title and content without the frame
 * archive — category, tag and date archives
 * search
 * 404

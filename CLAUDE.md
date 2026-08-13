@@ -98,7 +98,7 @@ Several partials are near-empty by design (`block-nowrap-first-column.json` has 
 
 ### Layout
 
-- `templates/` — index, single, page, archive, search, 404, plus two custom templates declared in `theme.json` → `customTemplates` (`no-title`, `style-guide`).
+- `templates/` — index, single, page, archive, search, 404, plus one custom template declared in `theme.json` → `customTemplates` (`no-title`).
 - `parts/` — header, footer, post-meta, sidebar. All four are declared in `theme.json` → `templateParts`; post-meta and sidebar use area `uncategorized`.
 - No `patterns/` directory. The theme's four patterns were dropped in favour of the ones core ships; `functions.php` is now the only PHP file.
 - Text domain is `felsqualle`; the directory name is not. There is deliberately no `load_theme_textdomain()` call — WP loads translations just in time.

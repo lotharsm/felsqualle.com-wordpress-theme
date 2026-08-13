@@ -718,14 +718,6 @@
 			"postTypes": [
 				"page"
 			]
-		},
-		{
-			"name": "style-guide",
-			"title": "Style guide",
-			"postTypes": [
-				"page",
-				"post"
-			]
 		}
 	],
 	"templateParts": [
