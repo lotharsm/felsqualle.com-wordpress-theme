@@ -1,0 +1,1 @@
+- [Brevity in comments and commits](brevity-in-comments-and-commits.md) — one-line commit messages, comments explain why in 1-3 lines

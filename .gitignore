@@ -1,0 +1,4 @@
+# Claude Code derives a project directory name from the absolute path of the
+# checkout, which encodes the hosting account. The memory lives under a plain
+# name instead; a local symlink points the derived name at it.
+.claude/projects/-*
