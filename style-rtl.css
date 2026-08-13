@@ -1,0 +1,55 @@
+/*
+ * RTL overrides for Felsqualle.
+ * Loaded automatically by wp_style_add_data( ..., 'rtl', 'replace' )
+ * when is_rtl() is true. Most of the theme uses logical properties
+ * already; only the genuinely directional bits are flipped here.
+ */
+
+.wp-block-quote {
+	border-left: 0;
+	border-right: 3px solid var(--wp--preset--color--accent);
+	padding-left: 0;
+	padding-right: var(--wp--preset--spacing--40);
+}
+
+.wp-block-list,
+.wp-block-post-content ol,
+.wp-block-post-content ul {
+	padding-left: 0;
+	padding-right: 1.25rem;
+}
+
+.wp-block-group.is-style-toc,
+.wp-block-list.is-style-toc {
+	margin-left: 0;
+	margin-right: 10px;
+}
+
+.wp-block-code,
+.wp-block-preformatted {
+	direction: ltr;
+	text-align: left;
+}
+
+.wp-block-post-navigation-link.post-navigation-link-previous .wp-block-post-navigation-link__arrow,
+.wp-block-post-navigation-link.post-navigation-link-next .wp-block-post-navigation-link__arrow {
+	transform: scaleX(-1);
+	display: inline-block;
+}
+
+.skip-link.screen-reader-text {
+	left: auto;
+	right: 8px;
+}
+
+/* Featured images hug the start edge, which is the right edge in RTL. */
+.wp-site-blocks .wp-block-post-featured-image:not([class*="align"]),
+.wp-site-blocks .is-layout-constrained > .wp-block-post-featured-image:not([class*="align"]),
+.wp-site-blocks .wp-block-query .wp-block-post-featured-image:not([class*="align"]),
+.wp-site-blocks .wp-block-post-template .wp-block-post-featured-image:not([class*="align"]),
+.wp-site-blocks .wp-block-post-featured-image:not([class*="align"]) a,
+.wp-site-blocks .wp-block-post-featured-image:not([class*="align"]) figure,
+.wp-site-blocks .wp-block-post-featured-image:not([class*="align"]) img {
+	margin-left: auto !important;
+	margin-right: 0 !important;
+}

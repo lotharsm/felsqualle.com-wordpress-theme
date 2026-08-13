@@ -1,0 +1,72 @@
+# Copyright (C) 2026 felsqualle
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: Felsqualle 1.0.0\n"
+"Report-Msgid-Bugs-To: https://felsqualle.com/\n"
+"POT-Creation-Date: 2026-08-04T00:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language-Team: \n"
+"X-Domain: felsqualle\n"
+
+#. Theme Name of the theme
+msgid "Felsqualle"
+msgstr ""
+
+#: functions.php
+msgid "Skip to main content"
+msgstr ""
+
+#: functions.php
+msgid "Felsqualle"
+msgstr ""
+
+#: functions.php
+msgid "Patterns bundled with the Felsqualle theme."
+msgstr ""
+
+#: functions.php
+msgid "Double frame"
+msgstr ""
+
+#: functions.php
+msgid "Terminal"
+msgstr ""
+
+#: functions.php
+msgid "Table of contents"
+msgstr ""
+
+#: functions.php
+msgid "Monospaced first column"
+msgstr ""
+
+#: functions.php
+msgid "Summary size"
+msgstr ""
+
+#: functions.php
+msgid "No dotted underline"
+msgstr ""
+
+#: patterns/logo-strip.php
+msgid "Projects and infrastructure"
+msgstr ""
+
+#: patterns/logo-strip.php
+msgid "Logo placeholder"
+msgstr ""
+
+#: patterns/faq.php
+msgid "Frequently asked questions"
+msgstr ""
+
+#: patterns/faq.php
+msgid "Is there a feed?"
+msgstr ""
+
+#: patterns/style-guide.php
+msgid "Theme reference — keep this page private."
+msgstr ""

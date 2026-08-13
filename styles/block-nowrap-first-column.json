@@ -1,0 +1,10 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.8/theme.json",
+	"version": 3,
+	"title": "Monospaced first column",
+	"slug": "nowrap-first-column",
+	"blockTypes": [
+		"core/table"
+	],
+	"styles": {}
+}

@@ -1,0 +1,126 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.8/theme.json",
+	"version": 3,
+	"title": "Dark",
+	"settings": {
+		"color": {
+			"palette": [
+				{
+					"name": "Base",
+					"slug": "base",
+					"color": "#171721"
+				},
+				{
+					"name": "Base card",
+					"slug": "base-2",
+					"color": "#1f1f2c"
+				},
+				{
+					"name": "Subtle",
+					"slug": "subtle",
+					"color": "#282836"
+				},
+				{
+					"name": "Contrast",
+					"slug": "contrast",
+					"color": "#f7f7fb"
+				},
+				{
+					"name": "Contrast muted",
+					"slug": "contrast-2",
+					"color": "#a9a9bd"
+				},
+				{
+					"name": "Accent",
+					"slug": "accent",
+					"color": "#ffc0cb"
+				},
+				{
+					"name": "Accent hover",
+					"slug": "accent-2",
+					"color": "#ffd9e0"
+				},
+				{
+					"name": "Blossom",
+					"slug": "blossom",
+					"color": "#ffc0cb"
+				},
+				{
+					"name": "Terminal",
+					"slug": "terminal",
+					"color": "#000000"
+				},
+				{
+					"name": "Warning",
+					"slug": "warning",
+					"color": "#e8c26a"
+				},
+				{
+					"name": "Error",
+					"slug": "error",
+					"color": "#ff9b93"
+				},
+				{
+					"name": "Notice",
+					"slug": "notice",
+					"color": "#8fbdf0"
+				},
+				{
+					"name": "Info",
+					"slug": "info",
+					"color": "#86d0a4"
+				}
+			]
+		}
+	},
+	"styles": {
+		"blocks": {
+			"core/code": {
+				"color": {
+					"background": "var:preset|color|terminal",
+					"text": "var:preset|color|contrast"
+				}
+			},
+			"core/preformatted": {
+				"color": {
+					"background": "var:preset|color|terminal",
+					"text": "var:preset|color|contrast"
+				}
+			},
+			"core/post-title": {
+				"elements": {
+					"link": {
+						"color": {
+							"text": "var:preset|color|contrast"
+						},
+						":hover": {
+							"color": {
+								"text": "var:preset|color|accent"
+							}
+						}
+					}
+				}
+			}
+		},
+		"elements": {
+			"button": {
+				"color": {
+					"background": "var:preset|color|accent",
+					"text": "var:preset|color|base"
+				},
+				"border": {
+					"color": "var:preset|color|accent"
+				},
+				":hover": {
+					"color": {
+						"background": "var:preset|color|accent-2",
+						"text": "var:preset|color|base"
+					},
+					"border": {
+						"color": "var:preset|color|accent-2"
+					}
+				}
+			}
+		}
+	}
+}

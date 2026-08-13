@@ -1,0 +1,667 @@
+/*
+Theme Name: felsqualle.com
+Theme URI: https://felsqualle.com/
+Author: felsqualle
+Author URI: https://felsqualle.com/
+Description: A text-first block theme for technical writing. Double-ruled article frames, a monospaced masthead and terminal-black code blocks, light and dark.
+Requires at least: 6.8
+Tested up to: 6.8
+Requires PHP: 7.4
+Version: 1.0.3
+License: GNU General Public License v2 or later
+License URI: https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: felsqualle
+Domain Path: /languages
+Tags: blog, one-column, full-site-editing, block-patterns, block-styles, style-variations, wide-blocks, editor-style, accessibility-ready, rtl-language-support, translation-ready, custom-colors, custom-logo, custom-menu, featured-images, sticky-post, threaded-comments
+*/
+
+/* --------------------------------------------------------------
+   Only what theme.json cannot express lives here.
+   Tokens, colours, type and spacing are all in theme.json.
+   -------------------------------------------------------------- */
+
+/* Border and padding count inside an element's width, so a framed group fills
+   its container exactly rather than overflowing it. Without this the 5px double
+   border and 1em padding are added on top of the width, and on a narrow
+   viewport the right edge is clipped by the overflow-x rule below. */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+/* The user-agent stylesheet puts an 8px margin on body. It is invisible on a
+   wide viewport, where the 1200px container has slack, but on a narrow one it
+   shows as a margin on every edge and keeps the frame off the screen edge.
+   The theme's own top and bottom spacing comes from theme.json root padding. */
+body {
+	margin: 0;
+}
+
+/* From the source stylesheet. Note that overflow-x on the root disables
+   position:sticky, so theme.json sets settings.position.sticky to false
+   rather than offering an option that cannot work. */
+html {
+	overflow-x: hidden;
+	scrollbar-gutter: stable both-edges;
+}
+
+/* main, section, aside { text-align: left; hyphens: auto; } */
+main,
+aside {
+	text-align: start;
+}
+
+/* Fixes iOS font sizing anomaly. Only the -webkit- form has ever shipped;
+   the unprefixed property is still a draft, so it is not written here. */
+code {
+	-webkit-text-size-adjust: 100%;
+}
+
+/* Hyphenated, pretty-wrapped body copy — as on the source site. Scoped to
+   prose so it cannot reach code, tables, navigation or meta. */
+.wp-block-post-content p,
+.wp-block-post-content li,
+.wp-block-post-excerpt__excerpt,
+.entry-content p {
+	hyphens: auto;
+	text-wrap: pretty;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	text-wrap: balance;
+}
+
+/* Dotted heading underline: the signature of the original design.
+   theme.json has no text-decoration-style, so it is set here. */
+.wp-site-blocks h2,
+.wp-site-blocks h3,
+.wp-site-blocks h4,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4 {
+	text-decoration: underline;
+	text-decoration-style: dotted;
+	text-decoration-color: currentColor;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.3em;
+}
+
+.wp-site-blocks h2 a,
+.wp-site-blocks h3 a,
+.wp-site-blocks h4 a {
+	text-decoration: inherit;
+	text-decoration-color: inherit;
+}
+
+/* Headings that are UI, not prose, keep a clean edge. */
+.wp-site-blocks .wp-block-site-title,
+.wp-site-blocks .wp-block-query-title,
+.wp-site-blocks .is-style-plain-heading {
+	text-decoration: none;
+}
+
+/* a:link, a:visited and a:active all use --linkcolor in the source stylesheet,
+   so an unvisited link is the same colour as one already followed. */
+:where(.wp-site-blocks) a:link,
+:where(.wp-site-blocks) a:visited,
+:where(.wp-site-blocks) a:active {
+	color: var(--wp--preset--color--accent);
+}
+
+/* Code and pre: monospace, never wrapped, scrolled horizontally instead.
+   Core sets white-space:pre-wrap and overflow-wrap:break-word on
+   .wp-block-code code, which these rules override. */
+/* The literal stack rather than var(--wp--preset--font-family--mono): stored
+   global styles in the database can redefine or drop that variable, and core
+   prints its own block rules after the theme stylesheet. */
+pre,
+code,
+kbd,
+samp,
+.wp-block-code,
+.wp-block-code code,
+.wp-block-code pre,
+.wp-block-preformatted,
+.wp-block-preformatted pre,
+.wp-block-verse,
+.wp-block-verse pre,
+.wp-site-blocks pre,
+.wp-site-blocks code {
+	font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", monospace !important;
+}
+
+.wp-block-code,
+.wp-block-preformatted,
+.wp-block-verse,
+.wp-site-blocks pre {
+	max-width: 100%;
+	overflow-x: auto;
+	white-space: pre;
+	word-break: normal;
+	overflow-wrap: normal;
+	hyphens: none;
+	tab-size: 4;
+}
+
+.wp-block-code code,
+.wp-block-preformatted pre {
+	display: block;
+	white-space: pre;
+	word-break: normal;
+	overflow-wrap: normal;
+	hyphens: none;
+	background: none;
+	padding: 0;
+	border-radius: 0;
+	font-size: inherit;
+	min-width: 0;
+}
+
+/* Inline code. The family comes from the !important rule above. */
+:where(.wp-site-blocks) code:not(.wp-block-code code) {
+	font-size: 0.9em;
+	background: var(--wp--preset--color--subtle);
+	padding: 0.1em 0.35em;
+	border-radius: 3px;
+}
+
+/* Tables: collapsed 1px accent grid, horizontally scrollable on narrow screens. */
+.wp-block-table {
+	overflow-x: auto;
+}
+
+.wp-block-table table {
+	border-collapse: collapse;
+	margin: 0 auto;
+	width: auto;
+}
+
+.wp-block-table th,
+.wp-block-table td {
+	border: 1px solid var(--wp--preset--color--accent);
+	padding: 0.5em 0.5em;
+	text-align: start;
+}
+
+.wp-block-table thead th {
+	font-family: var(--wp--preset--font-family--mono);
+	font-weight: 600;
+}
+
+/* Block style: first column never wraps (command / option reference tables). */
+.wp-block-table.is-style-nowrap-first-column td:first-of-type,
+.wp-block-table.is-style-nowrap-first-column th:first-of-type {
+	font-family: var(--wp--preset--font-family--mono);
+	white-space: nowrap;
+}
+
+/* Block style: table of contents box, replacing the source site's #toc. */
+.wp-block-group.is-style-toc,
+.wp-block-list.is-style-toc {
+	outline: 1px solid var(--wp--preset--color--accent);
+	outline-offset: 10px;
+	width: 90%;
+	max-width: 600px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	margin-inline-start: 10px;
+}
+
+/* The masthead shows the logo when one is set, and the site title only when
+   one is not. Scoped to the header template part, so the screen-reader-only
+   h1 that index.html places in <main> is untouched — the
+   render_block filter this replaces blanked that h1 too. Core renders nothing
+   for Site Logo when none is set, so :has() is false and the title shows. */
+.wp-block-template-part:has(.wp-block-site-logo img) .wp-block-site-title {
+	display: none;
+}
+
+/* Block styles: warning, error, notice and info callouts. The box — a flat
+   1px border, the same weight the theme uses on its other secondary boxes,
+   plus padding, margins and text colour — comes from the block-*.json
+   partials in styles/. These rules add the two things theme.json has no
+   property for: the ground, mixed from the callout hue and the page base so
+   it follows whichever palette is active (light, dark by device preference,
+   or the Dark variation pinned in the editor), and the coloured heading. */
+.is-style-warning {
+	background-color: color-mix(in srgb, var(--wp--preset--color--warning) 14%, var(--wp--preset--color--base));
+}
+
+.is-style-error {
+	background-color: color-mix(in srgb, var(--wp--preset--color--error) 14%, var(--wp--preset--color--base));
+}
+
+.is-style-notice {
+	background-color: color-mix(in srgb, var(--wp--preset--color--notice) 14%, var(--wp--preset--color--base));
+}
+
+.is-style-info {
+	background-color: color-mix(in srgb, var(--wp--preset--color--info) 14%, var(--wp--preset--color--base));
+}
+
+.is-style-warning > :first-child,
+.is-style-error > :first-child,
+.is-style-notice > :first-child,
+.is-style-info > :first-child {
+	margin-top: 0;
+}
+
+.is-style-warning > :last-child,
+.is-style-error > :last-child,
+.is-style-notice > :last-child,
+.is-style-info > :last-child {
+	margin-bottom: 0;
+}
+
+.is-style-warning :where(h1, h2, h3, h4, h5, h6),
+.is-style-warning strong {
+	color: var(--wp--preset--color--warning);
+	text-decoration: none;
+}
+
+.is-style-error :where(h1, h2, h3, h4, h5, h6),
+.is-style-error strong {
+	color: var(--wp--preset--color--error);
+	text-decoration: none;
+}
+
+.is-style-notice :where(h1, h2, h3, h4, h5, h6),
+.is-style-notice strong {
+	color: var(--wp--preset--color--notice);
+	text-decoration: none;
+}
+
+.is-style-info :where(h1, h2, h3, h4, h5, h6),
+.is-style-info strong {
+	color: var(--wp--preset--color--info);
+	text-decoration: none;
+}
+
+/* Block style: the double rule that frames articles and the masthead. */
+.is-style-double-frame {
+	border: 5px double var(--wp--preset--color--accent);
+	padding: 1em;
+}
+
+/* Block style: terminal panel. */
+.is-style-terminal {
+	background: var(--wp--preset--color--terminal);
+	color: var(--wp--preset--color--base);
+	font-family: var(--wp--preset--font-family--mono);
+	padding: 24px;
+}
+
+.is-style-terminal a {
+	color: var(--wp--preset--color--blossom);
+}
+
+/* Images never exceed their container. No display or margin is set: core's
+   block-library rules position images inside aligned figures, and this
+   stylesheet is enqueued after wp-block-library, so anything declared here at
+   equal specificity would override them. */
+img {
+	max-width: 100%;
+	height: auto;
+}
+
+/* Figures and captions */
+.wp-block-image figcaption {
+	text-align: center;
+}
+
+/* Alignment of ordinary images is left entirely to WordPress core — this theme
+   sets no float, margin or max-width on .alignleft / .alignright / .aligncenter.
+   The only exception is the featured image in the overview loops, below.
+   Floats must not escape the article frame or the post content. */
+.wp-block-post-content::after,
+.wp-block-post-template > li::after,
+article.wp-block-group::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+/* Featured images — .featured-image-summary in the source stylesheet.
+   Core forces width:100% on the img, so the 400px cap is applied to the
+   WRAPPER: 100% of a 400px box is 400px, whichever rule wins on the img. */
+.wp-site-blocks .wp-block-post-featured-image {
+	display: block;
+	max-width: 400px;
+	max-height: 400px;
+	overflow: hidden;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	margin-inline-start: 0;
+	margin-inline-end: auto;
+	text-align: start;
+}
+
+.wp-site-blocks .wp-block-post-featured-image a,
+.wp-site-blocks .wp-block-post-featured-image figure {
+	display: block;
+	max-width: 100%;
+	max-height: 400px;
+}
+
+.wp-site-blocks .wp-block-post-featured-image img {
+	display: block;
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 400px;
+	object-fit: contain;
+	margin-inline: 0;
+}
+
+/* Constrained layout centres every child with
+   "margin-left: auto !important; margin-right: auto !important".
+   Matching !important is the only way to pull the image back to the left. */
+.wp-site-blocks .wp-block-post-featured-image:not([class*="align"]),
+.wp-site-blocks .is-layout-constrained > .wp-block-post-featured-image:not([class*="align"]),
+.wp-site-blocks .wp-block-query .wp-block-post-featured-image:not([class*="align"]),
+.wp-site-blocks .wp-block-post-template .wp-block-post-featured-image:not([class*="align"]) {
+	margin-left: 0 !important;
+	margin-right: auto !important;
+}
+
+.wp-site-blocks .wp-block-post-featured-image:not([class*="align"]) a,
+.wp-site-blocks .wp-block-post-featured-image:not([class*="align"]) figure,
+.wp-site-blocks .wp-block-post-featured-image:not([class*="align"]) img {
+	margin-left: 0 !important;
+	margin-right: auto !important;
+}
+
+/* The navigation never collapses into an overlay — it wraps instead. */
+.wp-block-navigation__responsive-container-open,
+.wp-block-navigation__responsive-container-close {
+	display: none !important;
+}
+
+.wp-block-navigation .wp-block-navigation__container {
+	flex-wrap: wrap;
+}
+
+.wp-block-navigation .wp-block-navigation-item__content {
+	padding-block: 2px;
+}
+
+/* The pagination title is an unconditional sibling of the pagination block —
+   block templates have no conditional. Hide it whenever the pagination renders
+   without links, i.e. an empty listing or a single-page one. */
+.wp-block-query:not(:has(.wp-block-query-pagination a)) .pagination-title {
+	display: none;
+}
+
+/* Search field */
+.wp-block-search__input {
+	border: 1px solid var(--wp--preset--color--accent);
+	background: var(--wp--preset--color--base-2);
+	color: var(--wp--preset--color--contrast);
+	padding: 0.4em 0.6em;
+	width: 90%;
+	height: 2rem;
+}
+
+/* Header search — an icon button that expands the field in place. Core owns
+   the toggle, the aria-expanded/aria-controls wiring and the transition; these
+   rules only supply a deterministic open width.
+
+   Core collapses the field with `flex-basis: 0` and reopens it with
+   `flex-basis: 100%`, which resolves against the form — and the form is
+   content-sized here, so the open field would fall back to core's 3rem
+   min-width. Giving it an explicit basis instead fixes the open width and keeps
+   the .3s transition. The basis is scoped to the open state so the field stays
+   invisible while collapsed; the generic .wp-block-search__input rule above
+   would otherwise hold it open at 90%.
+
+   Colour, border and the hover/focus/active states are deliberately absent:
+   core gives the button .wp-element-button, so theme.json's button element
+   styles paint it the same as every other button in the theme. Only the
+   geometry is set here — a square 44px hit target, since theme.json's 1rem
+   inline padding would make an icon-only button a wide rectangle. */
+.header-search {
+	flex: 0 0 auto;
+}
+
+.header-search .wp-block-search__inside-wrapper {
+	align-items: center;
+}
+
+.header-search .wp-block-search__button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	min-height: 44px;
+	padding: 0;
+	cursor: pointer;
+}
+
+.header-search:not(.wp-block-search__searchfield-hidden) .wp-block-search__input {
+	flex-basis: min(12rem, calc(100vw - 8rem));
+	flex-grow: 0;
+	width: auto;
+	height: 44px;
+	padding: 0.4em 0.6em;
+}
+
+.header-search:not(.wp-block-search__searchfield-hidden) .wp-block-search__button {
+	margin-inline-start: 8px;
+}
+
+/* Below the breakpoint the search takes its own line in both states. Left to
+   itself the closed button fits beside the navigation but the open field does
+   not, so opening wrapped the form to a second line and grew the masthead 38px,
+   pushing the page down under the tap that caused it. Phones sit squarely in
+   that band — 412px Android, 414 to 430px iPhone. A full-width basis makes the
+   row geometry identical open and closed, so nothing moves. */
+@media (max-width: 600px) {
+	.header-search {
+		flex-basis: 100%;
+	}
+}
+
+/* Pagination: mono, centred, hidden when printing. */
+.wp-block-query-pagination {
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	margin-top: 50px;
+}
+
+.wp-block-query-pagination-numbers {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.wp-block-query-pagination-numbers .page-numbers {
+	padding: 0.2em 0.5em;
+}
+
+.wp-block-query-pagination-numbers .current {
+	border: 1px solid var(--wp--preset--color--accent);
+}
+
+/* Long pagination collapses to the first two and last two pages with an
+   ellipsis between: 1 2 … 98 99. midSize is 99 on the block so core renders
+   every link — paginate_links only offers an end_size of 1, which cannot give
+   two at each end, and this keeps the theme free of a PHP filter.
+
+   Both rules are self-gating. With four pages or fewer nothing is hidden
+   (every item is within two of one end) and no ellipsis is drawn (item 2 is
+   still among the last three), so short listings are untouched. */
+.wp-block-query-pagination-numbers .page-numbers:nth-child(n+3):nth-last-child(n+3):not(.current) {
+	display: none;
+}
+
+.wp-block-query-pagination-numbers .page-numbers:nth-child(2):not(:nth-last-child(-n+3))::after,
+.wp-block-query-pagination-numbers .page-numbers.current:not(:nth-child(-n+2)):not(:nth-last-child(-n+3))::after {
+	content: "…";
+	margin-inline-start: 10px;
+	color: var(--wp--preset--color--contrast-2);
+}
+
+/* An article with no featured image renders nothing for that block, leaving
+   the two separators that bracket it adjacent. Both are then removed — the
+   first via :has(), the second via the sibling combinator — so no rule is
+   drawn where the image would have been. Block templates have no conditional,
+   and the pair only ever becomes adjacent in this exact case. */
+.wp-block-post-template .wp-block-separator:has(+ .wp-block-separator),
+.wp-block-post-template .wp-block-separator + .wp-block-separator {
+	display: none;
+}
+
+/* Post navigation reads as two opposed buttons. */
+.wp-block-post-navigation-link {
+	max-width: 48%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+/* --- Accessibility ------------------------------------------------------ */
+
+/* Visually hidden but exposed to assistive technology. */
+.screen-reader-text {
+	border: 0;
+	clip-path: inset(50%);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
+}
+
+
+:where(.wp-site-blocks) :focus-visible {
+	outline: 2px solid var(--wp--preset--color--accent);
+	outline-offset: 2px;
+}
+
+/* The body margin reset takes every block flush to the viewport edge, which is
+   what the framed groups want but leaves the comment section — avatars, reply
+   forms, nested replies — with no breathing room on a narrow screen. Give just
+   that section a small inset below the frame width. */
+@media (max-width: 600px) {
+	.wp-block-comments,
+	.wp-block-post-navigation-link,
+	/* the groups wrapping each sidebar list, so their headings are inset too */
+	.wp-block-group:has(> .wp-block-latest-posts),
+	.wp-block-group:has(> .wp-block-tag-cloud),
+	.wp-block-group:has(> .wp-block-archives),
+	.wp-block-latest-posts,
+	.wp-block-tag-cloud,
+	.wp-block-archives,
+	.wp-site-blocks > footer,
+	.wp-block-template-part footer {
+		padding-inline: 12px;
+	}
+}
+
+/* Hit targets never fall below 44px on touch pointers. */
+@media (pointer: coarse) {
+	.wp-block-navigation a,
+	.wp-block-button__link,
+	.wp-block-query-pagination a {
+		min-height: 44px;
+		display: inline-flex;
+		align-items: center;
+	}
+
+	/* iOS Safari zooms the viewport whenever a focused text field is smaller
+	   than 16px, and theme.json sets core/search to the 0.875rem small preset.
+	   Opening the masthead search focuses the field, so the page zoomed and the
+	   layout shifted under the user. 16px on touch pointers stops the zoom at
+	   source; pinch zoom is left alone. Desktop keeps the small preset. */
+	.wp-block-search__input {
+		font-size: 16px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.001ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.001ms !important;
+		scroll-behavior: auto !important;
+	}
+}
+
+@media (prefers-contrast: more) {
+	.wp-block-table th,
+	.wp-block-table td {
+		border-width: 2px;
+	}
+}
+
+/* --- Print -------------------------------------------------------------- */
+
+@media print {
+	.wp-block-query-pagination,
+	.wp-block-navigation,
+	.wp-block-search,
+	.wp-block-post-navigation-link {
+		display: none !important;
+	}
+
+	.wp-site-blocks {
+		font-size: 12pt;
+	}
+
+	.is-style-double-frame,
+	.wp-block-post-template > li {
+		border-width: 1px;
+		border-style: solid;
+	}
+}
+
+/* --- Automatic colour scheme --------------------------------------------
+   The source stylesheet switches on prefers-color-scheme, so the theme does
+   too: the palette's custom properties are redefined for a dark device and
+   every preset colour follows. styles/dark.json remains available for anyone
+   who wants to pin the dark palette manually in the editor.
+   ------------------------------------------------------------------------ */
+
+:root {
+	color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		color-scheme: dark;
+		--wp--preset--color--base: #171721;
+		--wp--preset--color--base-2: #1f1f2c;
+		--wp--preset--color--subtle: #282836;
+		--wp--preset--color--contrast: #f7f7fb;
+		--wp--preset--color--contrast-2: #a9a9bd;
+		--wp--preset--color--accent: #ffc0cb;
+		--wp--preset--color--accent-2: #ffd9e0;
+		--wp--preset--color--blossom: #ffc0cb;
+		--wp--preset--color--terminal: #000000;
+
+		/* Callouts: legible foregrounds, low-luminance grounds. */
+		--wp--preset--color--warning: #e8c26a;
+		--wp--preset--color--error: #ff9b93;
+		--wp--preset--color--notice: #8fbdf0;
+		--wp--preset--color--info: #86d0a4;
+	}
+
+	/* Code panels keep a black ground, so their text follows the light
+	   foreground rather than the now-dark base colour. */
+	.wp-block-code,
+	.wp-block-code code,
+	.wp-block-preformatted,
+	.wp-block-preformatted pre {
+		color: var(--wp--preset--color--contrast);
+	}
+
+	/* Inline code sits on the subtle ground, not the terminal ground. */
+	:where(.wp-site-blocks) code:not(.wp-block-code code) {
+		color: var(--wp--preset--color--contrast);
+	}
+}

@@ -1,0 +1,17 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.8/theme.json",
+	"version": 3,
+	"title": "Summary size",
+	"slug": "summary",
+	"blockTypes": [
+		"core/post-featured-image"
+	],
+	"styles": {
+		"spacing": {
+			"margin": {
+				"top": "2em",
+				"bottom": "2em"
+			}
+		}
+	}
+}

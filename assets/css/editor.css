@@ -1,0 +1,347 @@
+/*
+ * Editor-only styles. Mirrors the front-end rules that live outside
+ * theme.json so the block editor canvas matches the published page.
+ *
+ * Two differences are deliberate:
+ *   - .screen-reader-text is not hidden here, so the visually hidden h1 that
+ *     index.html carries stays selectable in the canvas.
+ *   - the prefers-color-scheme block is not mirrored: the editor shows the
+ *     style variation the author has actually chosen, not the device's.
+ */
+
+.editor-styles-wrapper *,
+.editor-styles-wrapper *::before,
+.editor-styles-wrapper *::after {
+	box-sizing: border-box;
+}
+
+.editor-styles-wrapper .wp-block-post-content p,
+.editor-styles-wrapper .wp-block-post-content li,
+.editor-styles-wrapper .wp-block-post-excerpt__excerpt {
+	hyphens: auto;
+	text-wrap: pretty;
+}
+
+.editor-styles-wrapper h1,
+.editor-styles-wrapper h2,
+.editor-styles-wrapper h3,
+.editor-styles-wrapper h4,
+.editor-styles-wrapper h5,
+.editor-styles-wrapper h6 {
+	text-wrap: balance;
+}
+
+/* Headings that are UI, not prose, keep a clean edge. The dotted underline
+   itself is set in style.css, which already lists the editor selectors. */
+.editor-styles-wrapper .wp-block-site-title,
+.editor-styles-wrapper .wp-block-query-title,
+.editor-styles-wrapper .is-style-plain-heading {
+	text-decoration: none;
+}
+
+.editor-styles-wrapper .wp-block-image figcaption {
+	text-align: center;
+}
+
+.editor-styles-wrapper .wp-block-search__input {
+	border: 1px solid var(--wp--preset--color--accent);
+	background: var(--wp--preset--color--base-2);
+	color: var(--wp--preset--color--contrast);
+	padding: 0.4em 0.6em;
+	width: 90%;
+	height: 2rem;
+}
+
+/* Header search — mirrors the front-end rules so the icon button reads the
+   same in the Site Editor. Colour and border come from theme.json's button
+   element, in the editor as on the front end. */
+.editor-styles-wrapper .header-search .wp-block-search__inside-wrapper {
+	align-items: center;
+}
+
+.editor-styles-wrapper .header-search .wp-block-search__button {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	min-height: 44px;
+	padding: 0;
+}
+
+.editor-styles-wrapper .header-search:not(.wp-block-search__searchfield-hidden) .wp-block-search__input {
+	flex-basis: min(12rem, calc(100vw - 8rem));
+	flex-grow: 0;
+	width: auto;
+	height: 44px;
+	padding: 0.4em 0.6em;
+}
+
+.editor-styles-wrapper .header-search:not(.wp-block-search__searchfield-hidden) .wp-block-search__button {
+	margin-inline-start: 8px;
+}
+
+@media (max-width: 600px) {
+	.editor-styles-wrapper .header-search {
+		flex-basis: 100%;
+	}
+}
+
+.editor-styles-wrapper .wp-block-navigation .wp-block-navigation__container {
+	flex-wrap: wrap;
+}
+
+.editor-styles-wrapper .wp-block-navigation .wp-block-navigation-item__content {
+	padding-block: 2px;
+}
+
+.editor-styles-wrapper .wp-block-query-pagination {
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	margin-top: 50px;
+}
+
+.editor-styles-wrapper .wp-block-query-pagination-numbers {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+}
+
+.editor-styles-wrapper .wp-block-query-pagination-numbers .page-numbers {
+	padding: 0.2em 0.5em;
+}
+
+.editor-styles-wrapper .wp-block-query-pagination-numbers .current {
+	border: 1px solid var(--wp--preset--color--accent);
+}
+
+.editor-styles-wrapper .wp-block-post-navigation-link {
+	max-width: 48%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.editor-styles-wrapper .wp-block-table {
+	overflow-x: auto;
+}
+
+.editor-styles-wrapper .wp-block-table table {
+	border-collapse: collapse;
+	margin: 0 auto;
+	width: auto;
+}
+
+.editor-styles-wrapper .wp-block-table th,
+.editor-styles-wrapper .wp-block-table td {
+	border: 1px solid var(--wp--preset--color--accent);
+	padding: 0.5em 0.5em;
+	text-align: start;
+}
+
+.editor-styles-wrapper .wp-block-table thead th {
+	font-family: var(--wp--preset--font-family--mono);
+	font-weight: 600;
+}
+
+.editor-styles-wrapper pre,
+.editor-styles-wrapper code,
+.editor-styles-wrapper .wp-block-code,
+.editor-styles-wrapper .wp-block-code code,
+.editor-styles-wrapper .wp-block-preformatted,
+.editor-styles-wrapper .wp-block-verse {
+	font-family: ui-monospace, Menlo, Monaco, "Cascadia Mono", "Segoe UI Mono", "Roboto Mono", "Oxygen Mono", "Ubuntu Monospace", "Source Code Pro", "Fira Mono", "Droid Sans Mono", monospace !important;
+}
+
+.editor-styles-wrapper .wp-block-code,
+.editor-styles-wrapper .wp-block-preformatted,
+.editor-styles-wrapper .wp-block-verse,
+.editor-styles-wrapper pre {
+	max-width: 100%;
+	overflow-x: auto;
+	white-space: pre;
+	word-break: normal;
+	overflow-wrap: normal;
+	hyphens: none;
+	tab-size: 4;
+}
+
+.editor-styles-wrapper .wp-block-code code,
+.editor-styles-wrapper .wp-block-preformatted pre {
+	display: block;
+	white-space: pre;
+	word-break: normal;
+	overflow-wrap: normal;
+	background: none;
+	padding: 0;
+	font-size: inherit;
+}
+
+.editor-styles-wrapper code:not(.wp-block-code code) {
+	font-family: var(--wp--preset--font-family--mono);
+	font-size: 0.9em;
+	background: var(--wp--preset--color--subtle);
+	padding: 0.1em 0.35em;
+	border-radius: 3px;
+}
+
+.editor-styles-wrapper .is-style-double-frame {
+	border: 5px double var(--wp--preset--color--accent);
+	padding: 1em;
+}
+
+.editor-styles-wrapper .is-style-terminal {
+	background: var(--wp--preset--color--terminal);
+	color: var(--wp--preset--color--base);
+	font-family: var(--wp--preset--font-family--mono);
+	padding: 24px;
+}
+
+.editor-styles-wrapper .is-style-terminal a {
+	color: var(--wp--preset--color--blossom);
+}
+
+.editor-styles-wrapper .wp-block-group.is-style-toc,
+.editor-styles-wrapper .wp-block-list.is-style-toc {
+	outline: 1px solid var(--wp--preset--color--accent);
+	outline-offset: 10px;
+	width: 90%;
+	max-width: 600px;
+	margin-top: 30px;
+	margin-bottom: 30px;
+	margin-inline-start: 10px;
+}
+
+.editor-styles-wrapper .wp-block-table.is-style-nowrap-first-column td:first-of-type,
+.editor-styles-wrapper .wp-block-table.is-style-nowrap-first-column th:first-of-type {
+	font-family: var(--wp--preset--font-family--mono);
+	white-space: nowrap;
+}
+
+.editor-styles-wrapper .wp-block-post-featured-image {
+	display: block;
+	max-width: 400px;
+	max-height: 400px;
+	overflow: hidden;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	margin-inline-start: 0;
+	margin-inline-end: auto;
+	text-align: start;
+}
+
+.editor-styles-wrapper .wp-block-post-featured-image a,
+.editor-styles-wrapper .wp-block-post-featured-image figure {
+	display: block;
+	max-width: 100%;
+	max-height: 400px;
+}
+
+.editor-styles-wrapper .wp-block-post-featured-image img {
+	display: block;
+	width: auto;
+	height: auto;
+	max-width: 100%;
+	max-height: 400px;
+	object-fit: contain;
+}
+
+.editor-styles-wrapper .wp-block-post-featured-image:not([class*="align"]),
+.editor-styles-wrapper .is-layout-constrained > .wp-block-post-featured-image:not([class*="align"]),
+.editor-styles-wrapper .wp-block-query .wp-block-post-featured-image:not([class*="align"]),
+.editor-styles-wrapper .wp-block-post-template .wp-block-post-featured-image:not([class*="align"]) {
+	margin-left: 0 !important;
+	margin-right: auto !important;
+}
+
+.editor-styles-wrapper .wp-block-post-content::after {
+	content: "";
+	display: table;
+	clear: both;
+}
+
+.editor-styles-wrapper .wp-block-query:not(:has(.wp-block-query-pagination a)) .pagination-title {
+	display: none;
+}
+
+.editor-styles-wrapper .is-style-warning {
+	background-color: color-mix(in srgb, var(--wp--preset--color--warning) 14%, var(--wp--preset--color--base));
+}
+
+.editor-styles-wrapper .is-style-error {
+	background-color: color-mix(in srgb, var(--wp--preset--color--error) 14%, var(--wp--preset--color--base));
+}
+
+.editor-styles-wrapper .is-style-notice {
+	background-color: color-mix(in srgb, var(--wp--preset--color--notice) 14%, var(--wp--preset--color--base));
+}
+
+.editor-styles-wrapper .is-style-info {
+	background-color: color-mix(in srgb, var(--wp--preset--color--info) 14%, var(--wp--preset--color--base));
+}
+
+.editor-styles-wrapper .is-style-warning > :first-child,
+.editor-styles-wrapper .is-style-error > :first-child,
+.editor-styles-wrapper .is-style-notice > :first-child,
+.editor-styles-wrapper .is-style-info > :first-child {
+	margin-top: 0;
+}
+
+.editor-styles-wrapper .is-style-warning > :last-child,
+.editor-styles-wrapper .is-style-error > :last-child,
+.editor-styles-wrapper .is-style-notice > :last-child,
+.editor-styles-wrapper .is-style-info > :last-child {
+	margin-bottom: 0;
+}
+
+.editor-styles-wrapper .is-style-warning :where(h1, h2, h3, h4, h5, h6),
+.editor-styles-wrapper .is-style-warning strong {
+	color: var(--wp--preset--color--warning);
+	text-decoration: none;
+}
+
+.editor-styles-wrapper .is-style-error :where(h1, h2, h3, h4, h5, h6),
+.editor-styles-wrapper .is-style-error strong {
+	color: var(--wp--preset--color--error);
+	text-decoration: none;
+}
+
+.editor-styles-wrapper .is-style-notice :where(h1, h2, h3, h4, h5, h6),
+.editor-styles-wrapper .is-style-notice strong {
+	color: var(--wp--preset--color--notice);
+	text-decoration: none;
+}
+
+.editor-styles-wrapper .is-style-info :where(h1, h2, h3, h4, h5, h6),
+.editor-styles-wrapper .is-style-info strong {
+	color: var(--wp--preset--color--info);
+	text-decoration: none;
+}
+
+.editor-styles-wrapper .wp-block-template-part:has(.wp-block-site-logo img) .wp-block-site-title {
+	display: none;
+}
+
+/* Long pagination collapses to the first two and last two pages with an
+   ellipsis between: 1 2 … 98 99. midSize is 99 on the block so core renders
+   every link — paginate_links only offers an end_size of 1, which cannot give
+   two at each end, and this keeps the theme free of a PHP filter.
+
+   Both rules are self-gating. With four pages or fewer nothing is hidden
+   (every item is within two of one end) and no ellipsis is drawn (item 2 is
+   still among the last three), so short listings are untouched. */
+.editor-styles-wrapper .wp-block-query-pagination-numbers .page-numbers:nth-child(n+3):nth-last-child(n+3):not(.current) {
+	display: none;
+}
+
+.editor-styles-wrapper .wp-block-query-pagination-numbers .page-numbers:nth-child(2):not(:nth-last-child(-n+3))::after,
+.editor-styles-wrapper .wp-block-query-pagination-numbers .page-numbers.current:not(:nth-child(-n+2)):not(:nth-last-child(-n+3))::after {
+	content: "…";
+	margin-inline-start: 10px;
+	color: var(--wp--preset--color--contrast-2);
+}
+
+
+.editor-styles-wrapper .wp-block-post-template .wp-block-separator:has(+ .wp-block-separator),
+.editor-styles-wrapper .wp-block-post-template .wp-block-separator + .wp-block-separator {
+	display: none;
+}

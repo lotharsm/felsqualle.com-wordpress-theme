@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/wp/6.8/theme.json",
+	"version": 3,
+	"title": "Double frame",
+	"slug": "double-frame",
+	"blockTypes": [
+		"core/group"
+	],
+	"styles": {
+		"border": {
+			"color": "var:preset|color|accent",
+			"style": "double",
+			"width": "5px"
+		},
+		"spacing": {
+			"padding": {
+				"top": "1em",
+				"right": "1em",
+				"bottom": "1em",
+				"left": "1em"
+			}
+		}
+	}
+}
