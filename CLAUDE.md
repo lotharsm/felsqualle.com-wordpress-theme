@@ -41,6 +41,12 @@ wp transient delete --all        # flush cached theme.json / global styles after
 
 Bumping the theme version in `style.css` also cache-busts the enqueued stylesheet — `functions.php` passes `wp_get_theme()->get('Version')` as the asset version.
 
+## Git workflow
+
+**Commit and push straight to `main`.** Do not create feature branches or open pull requests for this repo — the maintainer works directly on the default branch.
+
+`main` is the default branch; there is no `master`. `origin` is the SSH remote `git@github.com:lotharsm/felsqualle.com-wordpress-theme.git`, so pushing needs a loaded SSH key.
+
 ## Architecture
 
 ### The core invariant
