@@ -7,7 +7,7 @@ Requires PHP: 7.4
 Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Tags: blog, one-column, full-site-editing, block-styles, style-variations, editor-style, accessibility-ready, rtl-language-support, translation-ready
+Tags: blog, one-column, full-site-editing, block-styles, style-variations, editor-style, accessibility-ready, rtl-language-support
 
 A text-first block theme for technical writing, derived from felsqualle.com.
 

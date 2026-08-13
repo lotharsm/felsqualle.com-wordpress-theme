@@ -102,7 +102,7 @@ Several partials are near-empty by design (`block-nowrap-first-column.json` has 
 - No `patterns/` directory. The theme's four patterns were dropped in favour of the ones core ships; `functions.php` is now the only PHP file.
 - **Both navigation blocks are `ref`-based**, not inline: header → menu 4 "Navigation", footer → menu 118 "Footer". Those menus are `wp_navigation` posts in the database, so they are not in git and the IDs are specific to this install.
 - `.htaccess` denies `.git` and dotfiles over HTTP; `.gitignore` hides the harness-generated `.claude/projects/-*` symlink.
-- Text domain is `felsqualle`; the directory name is not. There is deliberately no `load_theme_textdomain()` call — WP loads translations just in time.
+- `assets/` holds only `css/editor.css`. There is no `languages/` directory and no `.pot`: with the patterns gone the theme has no translatable PHP strings left, so the `translation-ready` tag and `Domain Path` header were dropped too. `Text Domain: felsqualle` stays for any future strings; there is deliberately no `load_theme_textdomain()` call.
 
 Templates are near-duplicates of each other by necessity (block templates have no partials beyond template parts and no conditionals). The index/archive/search query loops are largely the same markup; changes to one usually need repeating in the others.
 
