@@ -7,10 +7,6 @@
  * @since 1.0.0
  */
 
-if ( ! defined( 'ABSPATH' ) ) {
-	exit;
-}
-
 /**
  * Theme setup. Core adds every block-theme support at after_setup_theme
  * priority 1, and translations load just in time — hence nothing else here.

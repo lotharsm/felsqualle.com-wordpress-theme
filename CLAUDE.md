@@ -139,5 +139,5 @@ Traps worth keeping, from fixing the rest:
 - Tabs for indentation, in CSS, PHP and JSON alike.
 - **All comments are brief** — one or two lines, explaining *why*. Applies to every file type and to header docblocks as much as inline notes. Where a rule fights a specific core behaviour, name the behaviour and stop; preserve that reasoning when editing, since several rules look arbitrary without it. Never restate what a rule does, recount how a bug was found, or quote generated selectors that will drift. Where existing comments are long, tighten the ones you touch rather than matching them.
 - Commit messages are a single imperative line. Add a body only when the *why* genuinely will not fit, which is rare.
-- Every PHP file opens with an `ABSPATH` guard.
+- No `ABSPATH` guard — the bundled themes carry none either. Direct access to `functions.php` fatals to an empty 500 instead of an empty 200; it would leak a path only on a host with `display_errors` on.
 - Functions are prefixed `felsqualle_`.
