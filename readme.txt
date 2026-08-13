@@ -4,7 +4,7 @@ Contributors: felsqualle
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Stable tag: 1.0.1
+Stable tag: 1.0.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Tags: blog, one-column, full-site-editing, block-patterns, block-styles, style-variations, editor-style, accessibility-ready, rtl-language-support, translation-ready
@@ -20,7 +20,7 @@ measure (46rem for prose, 1200px for wide content).
 
 Everything visual is defined in theme.json. style.css only carries the handful
 of rules theme.json cannot express — dotted heading underlines, table borders,
-the skip link, print and reduced-motion rules.
+print and reduced-motion rules.
 
 = Templates =
 
@@ -93,13 +93,25 @@ is how the original site works.
 
 == Accessibility ==
 
-* Skip link to the main landmark.
+* Skip link to the main landmark, rendered by core ahead of the first <main>.
 * Visible 2px focus ring on all interactive elements.
 * 44px minimum hit target on coarse pointers.
 * Text and link colours meet WCAG 2.1 AA against both backgrounds.
 * prefers-reduced-motion and prefers-contrast honoured.
 
 == Changelog ==
+
+= 1.0.4 =
+* The terminal block style is legible in dark mode again, on both dark paths.
+* Restored the skip link to the main landmark.
+* RTL sites load style.css again, with style-rtl.css layered on top.
+
+= 1.0.3 =
+* Search fields no longer trigger the iOS zoom-on-focus that shifted the layout.
+* The masthead search no longer reflows the header when it opens on a phone.
+
+= 1.0.2 =
+* Added an expanding search button to the masthead, beside the navigation.
 
 = 1.0.1-rc =
 * Initial release.
