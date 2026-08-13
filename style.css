@@ -505,6 +505,13 @@ article.wp-block-group::after {
 	color: var(--wp--preset--color--contrast-2);
 }
 
+/* Post meta shows one date. Core renders the modified date only when it is
+   later than the publish date, so where it exists the publish date beside it
+   is hidden. Block templates have no conditional; this is the equivalent. */
+.wp-block-post-date:has(+ .wp-block-post-date__modified-date) {
+	display: none;
+}
+
 /* An article with no featured image renders nothing for that block, leaving
    the two separators that bracket it adjacent. Both are then removed — the
    first via :has(), the second via the sibling combinator — so no rule is
