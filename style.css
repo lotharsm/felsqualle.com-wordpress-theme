@@ -464,10 +464,15 @@ article.wp-block-group::after {
 	}
 
 	/* Wrapped, the masthead's 1em block gap becomes vertical space under the
-	   navigation, and space-between has nothing left to spread. */
+	   navigation. Only the row gap is cut; the column gap still applies. */
 	.wp-block-group:has(> .header-search) {
-		row-gap: var(--wp--preset--spacing--20);
-		justify-content: flex-start;
+		row-gap: 4px;
+	}
+
+	/* The full-width basis puts the button at the start of its own line;
+	   send it to the end instead, so the field opens leftward. */
+	.header-search .wp-block-search__inside-wrapper {
+		justify-content: flex-end;
 	}
 }
 
