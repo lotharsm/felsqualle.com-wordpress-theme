@@ -27,7 +27,6 @@ print and reduced-motion rules.
 * index — blog fallback
 * single — article, post meta, navigation, comments, latest posts
 * page
-* no-title — custom template, content only
 * archive — category, tag and date archives
 * search
 * 404

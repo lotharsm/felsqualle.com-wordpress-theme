@@ -696,15 +696,6 @@
 			}
 		}
 	},
-	"customTemplates": [
-		{
-			"name": "no-title",
-			"title": "Page (no title)",
-			"postTypes": [
-				"page"
-			]
-		}
-	],
 	"templateParts": [
 		{
 			"name": "header",

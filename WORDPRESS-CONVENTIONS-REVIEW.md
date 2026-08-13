@@ -22,11 +22,11 @@ items below aren't mistaken for a complete list of problems):
   `templates/index.html`.
 - No PHP closing tag in `functions.php`; no direct output, so no
   escaping/sanitization gaps.
-- Every template except `no-title.html` (see item 2) resolves to exactly one
-  `<h1>`: `single.html`/`page.html` via `post-title` (`level:1`), `index.html`
-  via a screen-reader-only `site-title` (`level:1`), `archive.html`/
-  `search.html` via `query-title` (default `level` is `1`, confirmed against
-  Gutenberg's `block.json`), `404.html` via an explicit `heading` block.
+- Every template resolves to exactly one `<h1>`: `single.html`/`page.html` via
+  `post-title` (`level:1`), `index.html` via a screen-reader-only `site-title`
+  (`level:1`), `archive.html`/`search.html` via `query-title` (default `level`
+  is `1`, confirmed against Gutenberg's `block.json`), `404.html` via an
+  explicit `heading` block.
 - Contrast spot-checks (WCAG relative-luminance formula) on the documented
   colour pairs: body text `contrast` on `base` ≈ 17:1 light / 16.6:1 dark;
   link `accent` on `base` ≈ 6.2:1 light / 11.6:1 dark; muted `contrast-2` on
@@ -70,44 +70,7 @@ Proposed final tag list (`readme.txt`, mirrored into `style.css`):
 Tags: blog, one-column, full-site-editing, block-styles, style-variations, editor-style, accessibility-ready, rtl-language-support, featured-images, threaded-comments
 ```
 
-### 2. `templates/no-title.html` — no heading at all (medium priority, a11y)
-
-Current:
-
-```html
-<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
-
-<!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
-<main class="wp-block-group"><!-- wp:post-content {"layout":{"type":"constrained"}} /--></main>
-<!-- /wp:group -->
-<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
-```
-
-This is the only template with zero heading blocks — no `post-title`, no
-hidden `site-title`. A page using it renders with no `<h1>` at all, which
-accessibility checkers (axe, WAVE, the WP accessibility-ready checklist)
-flag as a heading-structure issue, and which search engines also penalize
-mildly. `index.html` already solves the equivalent problem (no visible post
-title on a listing page) with a visually-hidden `site-title`. Proposed:
-mirror that pattern here.
-
-```html
-<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
-
-<!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
-<main class="wp-block-group"><!-- wp:site-title {"level":1,"className":"screen-reader-text"} /-->
-
-<!-- wp:post-content {"layout":{"type":"constrained"}} /--></main>
-<!-- /wp:group -->
-<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
-```
-
-Note: this is a content template, so a hidden site-title (not a hidden post
-title) is the right choice — matching `index.html`'s reasoning, since the
-whole point of "no-title" is to hide the *post's own* title, not to leave
-the page headingless.
-
-### 3. `Tested up to` / `$schema` pinned two majors behind (low priority)
+### 2. `Tested up to` / `$schema` pinned two majors behind (low priority)
 
 `readme.txt` and `style.css` both declare `Tested up to: 6.8`, and every
 `$schema` (`theme.json`, all of `styles/*.json`) points at
@@ -126,7 +89,7 @@ site's actual version):
 (Leave `Requires at least: 6.8` alone — that's a floor, not a ceiling, and
 lowering the floor isn't implied by any of this.)
 
-### 4. `theme.json` — `contentSize` and `wideSize` are both `1200px` (low priority, functional)
+### 3. `theme.json` — `contentSize` and `wideSize` are both `1200px` (low priority, functional)
 
 ```json
 "layout": {
@@ -150,7 +113,7 @@ override interacting badly with the framed-group markup (the double-border
 groups wrapping `post-content` also set `layout: constrained` at 1200px), not
 necessarily from the 46rem value itself. Test one template at a time.
 
-### 5. `parts/header.html` / `parts/footer.html` — hardcoded `wp_navigation` IDs (low priority, portability)
+### 4. `parts/header.html` / `parts/footer.html` — hardcoded `wp_navigation` IDs (low priority, portability)
 
 ```
 "ref":4     — header, menu "Navigation"
@@ -166,7 +129,7 @@ packaged for redistribution — flagged here only for completeness of a
 expected to avoid hardcoded `ref`s (falling back to inline navigation-link
 blocks or a pattern instead).
 
-### 6. `accessibility-ready` tag and the review process (informational only)
+### 5. `accessibility-ready` tag and the review process (informational only)
 
 Per the Make WordPress Themes handbook, the `accessibility-ready` tag is
 only meant to be added after (or as part of requesting) a manual audit from
@@ -175,7 +138,7 @@ policy *for themes distributed via WordPress.org*. Since this theme isn't
 in the .org directory, this has no practical consequence today, but if that
 ever changes, request the audit before relying on the tag, or drop it.
 
-### 7. `readme.txt` header field order (cosmetic)
+### 6. `readme.txt` header field order (cosmetic)
 
 `Tags` currently appears after `License URI`:
 

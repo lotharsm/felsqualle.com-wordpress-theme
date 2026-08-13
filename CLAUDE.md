@@ -97,7 +97,7 @@ Several partials are near-empty by design (`block-nowrap-first-column.json` has 
 
 ### Layout
 
-- `templates/` — index, single, page, archive, search, 404, plus one custom template declared in `theme.json` → `customTemplates` (`no-title`).
+- `templates/` — index, single, page, archive, search, 404.
 - `parts/` — header, footer, post-meta, sidebar. All four are declared in `theme.json` → `templateParts`; post-meta and sidebar use area `uncategorized`. post-meta is one native `post-date` plus tags; sidebar is Latest posts only, and is used by single, archive and 404.
 - No `patterns/` directory. The theme's four patterns were dropped in favour of the ones core ships; `functions.php` is now the only PHP file.
 - **Both navigation blocks are `ref`-based**, not inline: header → menu 4 "Navigation", footer → menu 118 "Footer". Those menus are `wp_navigation` posts in the database, so they are not in git and the IDs are specific to this install.
