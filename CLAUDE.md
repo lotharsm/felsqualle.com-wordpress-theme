@@ -116,18 +116,20 @@ Blog listings render **full `post-content`**, not excerpts — that is the text-
 
 ## Known issues
 
-Found in an initial review; none are fixed yet.
+From an initial review. Items 1, 2, 5 and 6 are fixed; 3 and 4 remain.
 
-1. **Terminal block style is invisible in dark mode.** `styles/block-terminal.json`, `style.css:288`, and `editor.css:192` all paint text `base` on a `terminal` ground; in dark mode that is `#171721` on `#000000` (~1.2:1). The dark patches in `style.css` and `dark.json` cover `.wp-block-code` / `.wp-block-preformatted` but omit `.is-style-terminal`. Breaks on both dark paths.
-2. **Skip link removed but still claimed.** `functions.php` unhooks it under both core names with no replacement, while `readme.txt` lists it under Accessibility, `style.css` declares the `accessibility-ready` tag, and `style-rtl.css` styles a `.skip-link` that never renders. Leaves WCAG 2.4.1 (Level A) with no mechanism.
-3. **Reading measure mismatch.** `readme.txt` documents "46rem for prose, 1200px for wide content"; `theme.json` sets `contentSize` *and* `wideSize` to `1200px`, and `46rem` appears nowhere. Prose runs the full width, and `alignwide` is a no-op. Unresolved whether the readme is stale or the setting was lost — confirm intent before changing.
-4. **`.is-style-summary` is inert.** `block-summary.json` sets only 2em vertical margins, which `style.css` already applies to every `.wp-block-post-featured-image` along with the 400px cap. Toggling the style changes nothing.
-5. **`.git` is inside the web root** and may be fetchable over HTTP.
-6. Stale comment: `functions.php:52` says "six structural block styles"; there are ten.
+3. **Reading measure mismatch.** `readme.txt` documents "46rem for prose, 1200px for wide content"; `theme.json` sets `contentSize` *and* `wideSize` to `1200px`. Prose runs full width and `alignwide` is a no-op. Decided fix, not yet made: `"contentSize":"46rem"` on the `post-content` block's constrained layout in the templates, leaving the frames at 1200px.
+4. **`.is-style-summary` is inert.** `block-summary.json` sets only the 2em margins `style.css` already gives every `.wp-block-post-featured-image`. Decided fix, not yet made: move the 400px cap off the blanket rule onto `.is-style-summary`, in `style.css` and `editor.css` both, uncapping single-post featured images.
+
+Two traps worth keeping, from fixing the rest:
+
+- **Block style variation CSS is per instance and comes from its own handle.** `block-style-variation-styles` is not a dependency of `felsqualle-style`, so print order against it is not guaranteed, and its selectors score 0,1,0. Duplicating a variation's properties in `style.css` silently defeats `dark.json` — that was the terminal bug.
+- **`'rtl' => 'replace'` swaps the sheet, it does not add to it.** Correct only for a full rtlcss mirror. `style-rtl.css` here is a short overrides file, so it must stay `true`.
 
 ## Conventions
 
 - Tabs for indentation, in CSS, PHP and JSON alike.
-- Comments explain *why*, especially where a rule exists to fight a specific core behaviour. Preserve that reasoning when editing — several rules look arbitrary without it.
+- **Be brief.** Comments run one to three lines and explain *why* — the code says what it does. Where a rule exists to fight a specific core behaviour, name the behaviour and stop; preserve that reasoning when editing, since several rules look arbitrary without it. Don't restate a rule in prose, don't recount how a bug was found, and don't quote generated selectors that will drift.
+- Commit messages are a single imperative line. Add a body only when the *why* genuinely will not fit, which is rare.
 - Every PHP file opens with an `ABSPATH` guard.
 - Functions are prefixed `felsqualle_`.
