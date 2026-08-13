@@ -21,8 +21,8 @@ function felsqualle_setup() {
 add_action( 'after_setup_theme', 'felsqualle_setup' );
 
 /**
- * Front-end stylesheet; core never enqueues style.css itself. RTL is `true`,
- * not 'replace', which would serve style-rtl.css instead of style.css.
+ * Front-end stylesheet; core never enqueues style.css itself. No RTL sheet —
+ * the CSS is written with logical properties, as the bundled themes are.
  */
 function felsqualle_enqueue_styles() {
 	// Depend on the core block library and global styles to force print order,
@@ -33,7 +33,8 @@ function felsqualle_enqueue_styles() {
 		array( 'wp-block-library', 'global-styles' ),
 		wp_get_theme()->get( 'Version' )
 	);
-	wp_style_add_data( 'felsqualle-style', 'rtl', true );
+	// Lets core inline the sheet when it fits its budget, as the bundled themes do.
+	wp_style_add_data( 'felsqualle-style', 'path', get_theme_file_path( 'style.css' ) );
 }
 add_action( 'wp_enqueue_scripts', 'felsqualle_enqueue_styles', 20 );
 

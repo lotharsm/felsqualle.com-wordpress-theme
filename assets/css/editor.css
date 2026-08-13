@@ -246,16 +246,16 @@
 .editor-styles-wrapper .is-layout-constrained > .wp-block-post-featured-image:not([class*="align"]),
 .editor-styles-wrapper .wp-block-query .wp-block-post-featured-image:not([class*="align"]),
 .editor-styles-wrapper .wp-block-post-template .wp-block-post-featured-image:not([class*="align"]) {
-	margin-left: 0 !important;
-	margin-right: auto !important;
+	margin-inline-start: 0 !important;
+	margin-inline-end: auto !important;
 }
 
 /* The rules bracketing the featured image match its 400px box. */
 .editor-styles-wrapper .wp-block-post-template .wp-block-separator:has(+ .wp-block-post-featured-image),
 .editor-styles-wrapper .wp-block-post-template .wp-block-post-featured-image + .wp-block-separator {
 	max-width: 400px;
-	margin-left: 0 !important;
-	margin-right: auto !important;
+	margin-inline-start: 0 !important;
+	margin-inline-end: auto !important;
 }
 
 .editor-styles-wrapper .wp-block-post-content::after {

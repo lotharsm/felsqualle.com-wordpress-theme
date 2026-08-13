@@ -99,7 +99,7 @@ is how the original site works.
 = 1.0.4 =
 * The terminal block style is legible in dark mode again, on both dark paths.
 * Restored the skip link to the main landmark.
-* RTL sites load style.css again, with style-rtl.css layered on top.
+* RTL is handled with logical properties instead of a separate stylesheet.
 
 = 1.0.3 =
 * Search fields no longer trigger the iOS zoom-on-focus that shifted the layout.

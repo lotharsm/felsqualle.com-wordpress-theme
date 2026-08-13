@@ -55,15 +55,14 @@ Bumping the theme version in `style.css` also cache-busts the enqueued styleshee
 
 Things theme.json genuinely cannot express, and which therefore legitimately live in CSS: `text-decoration-style` (the dotted heading underlines), `outline`, `white-space`, `color-mix()` grounds, `:has()` conditionals, media queries, print rules.
 
-### The four-surface mirroring obligation
+### The three-surface mirroring obligation
 
-This is the most important thing to know, and the source of the bug class this theme is prone to. A single visual rule outside theme.json may need to be written in **up to four places**:
+This is the most important thing to know, and the source of the bug class this theme is prone to. A single visual rule outside theme.json may need to be written in **up to three places**:
 
 | Surface | File | Applies when |
 |---|---|---|
 | Front end | `style.css` | always |
 | Editor canvas | `assets/css/editor.css` | always — same rule, prefixed `.editor-styles-wrapper` |
-| RTL | `style-rtl.css` | rule is directional and not already using logical properties |
 | Dark | `style.css` dark block **and** `styles/dark.json` | rule references a palette color that flips (see below) |
 
 `editor.css` is a deliberate near-copy of `style.css`. Two divergences are intentional and documented at the top of that file: `.screen-reader-text` stays visible in the canvas, and the `prefers-color-scheme` block is *not* mirrored (the editor shows the author's chosen variation, not the device's).
@@ -129,7 +128,7 @@ From an initial review. Items 1, 2, 5 and 6 are fixed; 3 and 4 remain.
 Traps worth keeping, from fixing the rest:
 
 - **Block style variation CSS is per instance and comes from its own handle.** `block-style-variation-styles` is not a dependency of `felsqualle-style`, so print order against it is not guaranteed, and its selectors score 0,1,0. Duplicating a variation's properties in `style.css` silently defeats `dark.json` — that was the terminal bug.
-- **`'rtl' => 'replace'` swaps the sheet, it does not add to it.** Correct only for a full rtlcss mirror. `style-rtl.css` here is a short overrides file, so it must stay `true`.
+- **There is no `style-rtl.css`.** The CSS uses logical properties, so RTL needs no separate sheet; `[dir="rtl"]` covers the one genuinely directional rule (navigation arrows). theme.json's `border`/`padding` are physical only, which is why the quote rule and list indent live in `style.css`.
 - **An empty navigation menu does not render empty.** Core falls back to the most recent `wp_navigation` post, which resolves to `core/page-list` here — so an emptied menu shows every page. Setting `ref` does not avoid it; the check runs after the ref is resolved. Keep referenced menus non-empty.
 - **`core/post-date` with `displayType: modified` renders nothing** unless the modified date is strictly later than the publish date. It does not fall back to the publish date.
 

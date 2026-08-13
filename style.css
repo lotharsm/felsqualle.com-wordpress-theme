@@ -166,6 +166,33 @@ samp,
 	border-radius: 3px;
 }
 
+/* Quote rule and list indent. theme.json's border and padding are physical
+   only, so these live here as logical properties and flip in RTL by themselves. */
+.wp-block-quote {
+	border-inline-start: 3px solid var(--wp--preset--color--accent);
+	padding-inline-start: var(--wp--preset--spacing--40);
+}
+
+.wp-block-list,
+.wp-block-post-content ol,
+.wp-block-post-content ul {
+	padding-inline-start: 1.25rem;
+}
+
+/* Code stays left-to-right whatever the page direction. */
+.wp-block-code,
+.wp-block-preformatted {
+	direction: ltr;
+	text-align: start;
+}
+
+/* The only genuinely directional rule left: core's arrow glyphs point the
+   wrong way when the page does. */
+[dir="rtl"] .wp-block-post-navigation-link__arrow {
+	display: inline-block;
+	transform: scaleX(-1);
+}
+
 /* Tables: collapsed 1px accent grid, horizontally scrollable on narrow screens. */
 .wp-block-table {
 	overflow-x: auto;
@@ -353,15 +380,15 @@ article.wp-block-group::after {
 .wp-site-blocks .is-layout-constrained > .wp-block-post-featured-image:not([class*="align"]),
 .wp-site-blocks .wp-block-query .wp-block-post-featured-image:not([class*="align"]),
 .wp-site-blocks .wp-block-post-template .wp-block-post-featured-image:not([class*="align"]) {
-	margin-left: 0 !important;
-	margin-right: auto !important;
+	margin-inline-start: 0 !important;
+	margin-inline-end: auto !important;
 }
 
 .wp-site-blocks .wp-block-post-featured-image:not([class*="align"]) a,
 .wp-site-blocks .wp-block-post-featured-image:not([class*="align"]) figure,
 .wp-site-blocks .wp-block-post-featured-image:not([class*="align"]) img {
-	margin-left: 0 !important;
-	margin-right: auto !important;
+	margin-inline-start: 0 !important;
+	margin-inline-end: auto !important;
 }
 
 /* The rules bracketing the featured image match its 400px box, so the pair
@@ -370,8 +397,8 @@ article.wp-block-group::after {
 .wp-block-post-template .wp-block-separator:has(+ .wp-block-post-featured-image),
 .wp-block-post-template .wp-block-post-featured-image + .wp-block-separator {
 	max-width: 400px;
-	margin-left: 0 !important;
-	margin-right: auto !important;
+	margin-inline-start: 0 !important;
+	margin-inline-end: auto !important;
 }
 
 /* The navigation never collapses into an overlay — it wraps instead. */

@@ -549,16 +549,8 @@
 				}
 			},
 			"core/quote": {
-				"border": {
-					"left": {
-						"color": "var:preset|color|accent",
-						"style": "solid",
-						"width": "3px"
-					}
-				},
 				"spacing": {
 					"padding": {
-						"left": "var:preset|spacing|40",
 						"top": "var:preset|spacing|20",
 						"bottom": "var:preset|spacing|20"
 					}
@@ -590,13 +582,6 @@
 			"core/separator": {
 				"color": {
 					"text": "var:preset|color|accent"
-				}
-			},
-			"core/list": {
-				"spacing": {
-					"padding": {
-						"left": "1.25rem"
-					}
 				}
 			},
 			"core/details": {
