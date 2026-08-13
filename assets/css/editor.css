@@ -2,14 +2,11 @@
  * Editor-only styles. Mirrors the front-end rules that live outside
  * theme.json so the block editor canvas matches the published page.
  *
- * Three differences are deliberate:
+ * Two differences are deliberate:
  *   - .screen-reader-text is not hidden here, so the visually hidden h1 that
  *     index.html carries stays selectable in the canvas.
  *   - the prefers-color-scheme block is not mirrored: the editor shows the
  *     style variation the author has actually chosen, not the device's.
- *   - the rule hiding the publish date beside a modified date is not mirrored:
- *     the canvas renders both as placeholders, and hiding one would make it
- *     unselectable.
  */
 
 .editor-styles-wrapper *,
