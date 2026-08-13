@@ -3,8 +3,8 @@
  * Felsqualle — theme functions.
  *
  * Deliberately small: everything visual lives in theme.json, the templates,
- * the patterns and the /styles partials. Only two things genuinely need PHP
- * — the stylesheet enqueue and the theme-color meta.
+ * the patterns and the /styles partials. Only three things genuinely need PHP
+ * — the stylesheet enqueue, the theme-color meta and the navigation fallback.
  *
  * @package Felsqualle
  * @since 1.0.0
@@ -62,6 +62,14 @@ add_action( 'wp_enqueue_scripts', 'felsqualle_enqueue_styles', 20 );
  * with no mechanism while readme.txt still claimed one. Core injects it ahead
  * of the first <main> and ships its own focus styles.
  */
+
+/*
+ * An empty navigation block otherwise renders the most recent menu in the
+ * database — which would show the top nav's page list in the footer. Empty
+ * means empty. The header nav carries its own inner blocks and never reaches
+ * this fallback.
+ */
+add_filter( 'block_core_navigation_render_fallback', '__return_empty_array' );
 
 /**
  * Browser chrome colour, matching the source site's palette in both schemes.
