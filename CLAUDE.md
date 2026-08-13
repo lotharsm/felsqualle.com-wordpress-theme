@@ -43,9 +43,9 @@ Bumping the theme version in `style.css` also cache-busts the enqueued styleshee
 
 ## Git workflow
 
-**Commit and push straight to `main`.** Do not create feature branches or open pull requests for this repo — the maintainer works directly on the default branch.
+**Commit straight to `main`; do not push.** No feature branches, no pull requests — the maintainer works directly on the default branch and pushes himself. Commit the work, say it is ready, and leave `origin` alone.
 
-`main` is the default branch; there is no `master`. `origin` is the SSH remote `git@github.com:lotharsm/felsqualle.com-wordpress-theme.git`, so pushing needs a loaded SSH key.
+`main` is the default branch; there is no `master`. `origin` is the SSH remote `git@github.com:lotharsm/felsqualle.com-wordpress-theme.git`, and this account has no key for it — pushes fail on `Permission denied (publickey)`.
 
 ## Architecture
 
