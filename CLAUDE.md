@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+See also [MEMORY.md](MEMORY.md) for live-environment facts, conventions, and implementation notes not carried here.
+
 ## What this is
 
 `felsqualle.com` — a WordPress Full Site Editing (block) theme for long-form technical writing, ported from an existing static site. Text-first: double-ruled article frames, monospaced masthead, terminal-black code blocks, light and dark.
