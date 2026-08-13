@@ -3,8 +3,8 @@
  * Felsqualle — theme functions.
  *
  * Deliberately small: everything visual lives in theme.json, the templates,
- * the patterns and the /styles partials. Only two things genuinely need PHP
- * — the stylesheet enqueue and the theme-color meta.
+ * the patterns and the /styles partials. Only three things genuinely need PHP
+ * — the stylesheet enqueue, removing core's skip link and the theme-color meta.
  *
  * @package Felsqualle
  * @since 1.0.0
@@ -33,10 +33,7 @@ function felsqualle_setup() {
 add_action( 'after_setup_theme', 'felsqualle_setup' );
 
 /**
- * Front-end stylesheet. style-rtl.css is appended when is_rtl().
- *
- * `true`, not 'replace': 'replace' serves style-rtl.css INSTEAD OF style.css,
- * which suits a full rtlcss mirror, not this short overrides file.
+ * Front-end stylesheet. style-rtl.css is swapped in automatically when is_rtl().
  */
 function felsqualle_enqueue_styles() {
 	// Depend on the core block library and global styles so this sheet is
@@ -47,21 +44,25 @@ function felsqualle_enqueue_styles() {
 		array( 'wp-block-library', 'global-styles' ),
 		wp_get_theme()->get( 'Version' )
 	);
-	wp_style_add_data( 'felsqualle-style', 'rtl', true );
+	wp_style_add_data( 'felsqualle-style', 'rtl', 'replace' );
 }
 add_action( 'wp_enqueue_scripts', 'felsqualle_enqueue_styles', 20 );
 
 /*
- * The ten block styles — double frame, terminal, table of contents, monospaced
- * first column, summary size, plain heading, warning, error, notice and info —
- * are registered natively by the block-*.json partials in /styles.
+ * The six structural block styles — double frame, terminal, table of contents,
+ * monospaced first column, summary size, plain heading — are registered
+ * natively by the block-*.json partials in /styles.
  */
 
-/*
- * Core's skip link is deliberately left hooked — unhooking it left WCAG 2.4.1
- * with no mechanism while readme.txt still claimed one. Core injects it ahead
- * of the first <main> and ships its own focus styles.
+/**
+ * Remove the skip link WordPress adds to every block theme. Core hooks it
+ * under two different names depending on version, so both are unhooked.
  */
+function felsqualle_remove_skip_link() {
+	remove_action( 'wp_enqueue_scripts', 'wp_enqueue_block_template_skip_link' );
+	remove_action( 'wp_footer', 'the_block_template_skip_link' );
+}
+add_action( 'init', 'felsqualle_remove_skip_link' );
 
 /**
  * Browser chrome colour, matching the source site's palette in both schemes.

@@ -52,40 +52,6 @@
 	height: 2rem;
 }
 
-/* Header search — mirrors the front-end rules so the icon button reads the
-   same in the Site Editor. Colour and border come from theme.json's button
-   element, in the editor as on the front end. */
-.editor-styles-wrapper .header-search .wp-block-search__inside-wrapper {
-	align-items: center;
-}
-
-.editor-styles-wrapper .header-search .wp-block-search__button {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	min-width: 44px;
-	min-height: 44px;
-	padding: 0;
-}
-
-.editor-styles-wrapper .header-search:not(.wp-block-search__searchfield-hidden) .wp-block-search__input {
-	flex-basis: min(12rem, calc(100vw - 8rem));
-	flex-grow: 0;
-	width: auto;
-	height: 44px;
-	padding: 0.4em 0.6em;
-}
-
-.editor-styles-wrapper .header-search:not(.wp-block-search__searchfield-hidden) .wp-block-search__button {
-	margin-inline-start: 8px;
-}
-
-@media (max-width: 600px) {
-	.editor-styles-wrapper .header-search {
-		flex-basis: 100%;
-	}
-}
-
 .editor-styles-wrapper .wp-block-navigation .wp-block-navigation__container {
 	flex-wrap: wrap;
 }
@@ -189,8 +155,16 @@
 	padding: 1em;
 }
 
-/* No .is-style-terminal rules, matching style.css: block-terminal.json paints
-   the panel, and repeating "color: base" would override the Dark variation. */
+.editor-styles-wrapper .is-style-terminal {
+	background: var(--wp--preset--color--terminal);
+	color: var(--wp--preset--color--base);
+	font-family: var(--wp--preset--font-family--mono);
+	padding: 24px;
+}
+
+.editor-styles-wrapper .is-style-terminal a {
+	color: var(--wp--preset--color--blossom);
+}
 
 .editor-styles-wrapper .wp-block-group.is-style-toc,
 .editor-styles-wrapper .wp-block-list.is-style-toc {

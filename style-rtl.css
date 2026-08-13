@@ -37,10 +37,9 @@
 	display: inline-block;
 }
 
-/* Core offsets the focused skip link with left: 5px; mirror it. */
-.skip-link.screen-reader-text:focus {
+.skip-link.screen-reader-text {
 	left: auto;
-	right: 5px;
+	right: 8px;
 }
 
 /* Featured images hug the start edge, which is the right edge in RTL. */

@@ -7,7 +7,7 @@ Description: A text-first block theme for technical writing. Double-ruled articl
 Requires at least: 6.8
 Tested up to: 6.8
 Requires PHP: 7.4
-Version: 1.0.3
+Version: 1.0.1
 License: GNU General Public License v2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain: felsqualle
@@ -284,9 +284,17 @@ samp,
 	padding: 1em;
 }
 
-/* Block style: terminal panel — styles/block-terminal.json paints it. Nothing
-   repeated here: an unconditional "color: base" in this sheet prints after the
-   variation CSS and would override dark.json's correction. */
+/* Block style: terminal panel. */
+.is-style-terminal {
+	background: var(--wp--preset--color--terminal);
+	color: var(--wp--preset--color--base);
+	font-family: var(--wp--preset--font-family--mono);
+	padding: 24px;
+}
+
+.is-style-terminal a {
+	color: var(--wp--preset--color--blossom);
+}
 
 /* Images never exceed their container. No display or margin is set: core's
    block-library rules position images inside aligned figures, and this
@@ -393,65 +401,6 @@ article.wp-block-group::after {
 	padding: 0.4em 0.6em;
 	width: 90%;
 	height: 2rem;
-}
-
-/* Header search — an icon button that expands the field in place. Core owns
-   the toggle, the aria-expanded/aria-controls wiring and the transition; these
-   rules only supply a deterministic open width.
-
-   Core collapses the field with `flex-basis: 0` and reopens it with
-   `flex-basis: 100%`, which resolves against the form — and the form is
-   content-sized here, so the open field would fall back to core's 3rem
-   min-width. Giving it an explicit basis instead fixes the open width and keeps
-   the .3s transition. The basis is scoped to the open state so the field stays
-   invisible while collapsed; the generic .wp-block-search__input rule above
-   would otherwise hold it open at 90%.
-
-   Colour, border and the hover/focus/active states are deliberately absent:
-   core gives the button .wp-element-button, so theme.json's button element
-   styles paint it the same as every other button in the theme. Only the
-   geometry is set here — a square 44px hit target, since theme.json's 1rem
-   inline padding would make an icon-only button a wide rectangle. */
-.header-search {
-	flex: 0 0 auto;
-}
-
-.header-search .wp-block-search__inside-wrapper {
-	align-items: center;
-}
-
-.header-search .wp-block-search__button {
-	display: inline-flex;
-	align-items: center;
-	justify-content: center;
-	min-width: 44px;
-	min-height: 44px;
-	padding: 0;
-	cursor: pointer;
-}
-
-.header-search:not(.wp-block-search__searchfield-hidden) .wp-block-search__input {
-	flex-basis: min(12rem, calc(100vw - 8rem));
-	flex-grow: 0;
-	width: auto;
-	height: 44px;
-	padding: 0.4em 0.6em;
-}
-
-.header-search:not(.wp-block-search__searchfield-hidden) .wp-block-search__button {
-	margin-inline-start: 8px;
-}
-
-/* Below the breakpoint the search takes its own line in both states. Left to
-   itself the closed button fits beside the navigation but the open field does
-   not, so opening wrapped the form to a second line and grew the masthead 38px,
-   pushing the page down under the tap that caused it. Phones sit squarely in
-   that band — 412px Android, 414 to 430px iPhone. A full-width basis makes the
-   row geometry identical open and closed, so nothing moves. */
-@media (max-width: 600px) {
-	.header-search {
-		flex-basis: 100%;
-	}
 }
 
 /* Pagination: mono, centred, hidden when printing. */
@@ -562,15 +511,6 @@ article.wp-block-group::after {
 		display: inline-flex;
 		align-items: center;
 	}
-
-	/* iOS Safari zooms the viewport whenever a focused text field is smaller
-	   than 16px, and theme.json sets core/search to the 0.875rem small preset.
-	   Opening the masthead search focuses the field, so the page zoomed and the
-	   layout shifted under the user. 16px on touch pointers stops the zoom at
-	   source; pinch zoom is left alone. Desktop keeps the small preset. */
-	.wp-block-search__input {
-		font-size: 16px;
-	}
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -654,13 +594,6 @@ article.wp-block-group::after {
 
 	/* Inline code sits on the subtle ground, not the terminal ground. */
 	:where(.wp-site-blocks) code:not(.wp-block-code code) {
-		color: var(--wp--preset--color--contrast);
-	}
-
-	/* Terminal panel, same problem. Two classes because the variation CSS
-	   scores 0,1,0 and comes from a handle this sheet does not depend on, so
-	   print order alone cannot be relied on. */
-	.wp-block-group.is-style-terminal {
 		color: var(--wp--preset--color--contrast);
 	}
 }
