@@ -51,7 +51,7 @@ Bumping the theme version in `style.css` also cache-busts the enqueued styleshee
 
 ### The core invariant
 
-**All visual styling belongs in `theme.json`. `style.css` carries only what theme.json cannot express.** This rule is held to consistently and is the reason `functions.php` is 75 lines. Before adding CSS, check whether theme.json has a property for it.
+**All visual styling belongs in `theme.json`. `style.css` carries only what theme.json cannot express.** This rule is held to consistently and is why `functions.php` stays under 80 lines. Before adding CSS, check whether theme.json has a property for it.
 
 Things theme.json genuinely cannot express, and which therefore legitimately live in CSS: `text-decoration-style` (the dotted heading underlines), `outline`, `white-space`, `color-mix()` grounds, `:has()` conditionals, media queries, print rules.
 
@@ -79,7 +79,7 @@ Dark mode can arrive by either route, and a fix applied to one does **not** cove
 
 Any dark-mode correction generally needs to land in **both**.
 
-**The trap:** the dark block flips what the tokens *mean*. `base` goes from `#f0f3f4` (light ground) to `#171721` (dark ground). So **any rule using `base` as a foreground color breaks in dark mode** — it becomes near-black text. `style.css` already patches this for `.wp-block-code` / `.wp-block-preformatted` by reassigning them to `contrast`; `dark.json` does the same. Grep for `color: var(--wp--preset--color--base)` when touching anything on a dark ground.
+**The trap:** the dark block flips what the tokens *mean*. `base` goes from `#f0f3f4` (light ground) to `#171721` (dark ground). So **any rule using `base` as a foreground color breaks in dark mode** — it becomes near-black text. `style.css` already patches this for `.wp-block-code`, `.wp-block-preformatted`, inline `code` and `.is-style-terminal` by reassigning them to `contrast`; `dark.json` does the same. Grep for `color: var(--wp--preset--color--base)` when touching anything on a dark ground.
 
 ### Specificity is controlled by enqueue order, not selectors
 
@@ -87,7 +87,7 @@ Any dark-mode correction generally needs to land in **both**.
 
 Consequences worth understanding before changing it:
 
-- The handful of `!important` uses that remain are documented in-place and fight specific core rules (constrained-layout auto-margins on featured images, the monospace stack that core's block rules would otherwise re-specify).
+- The handful of `!important` uses that remain are documented in-place and fight specific core rules (constrained-layout auto-margins on featured images and the separators beside them, the monospace stack that core's block rules would otherwise re-specify, the hidden overlay toggles).
 - Because the theme sheet prints *after* `global-styles`, the dark `:root` block also overrides colors an author sets in the Site Editor — but only on dark devices.
 
 ### Block styles need no PHP
@@ -99,8 +99,10 @@ Several partials are near-empty by design (`block-nowrap-first-column.json` has 
 ### Layout
 
 - `templates/` — index, single, page, archive, search, 404, plus one custom template declared in `theme.json` → `customTemplates` (`no-title`).
-- `parts/` — header, footer, post-meta, sidebar. All four are declared in `theme.json` → `templateParts`; post-meta and sidebar use area `uncategorized`.
+- `parts/` — header, footer, post-meta, sidebar. All four are declared in `theme.json` → `templateParts`; post-meta and sidebar use area `uncategorized`. post-meta is one native `post-date` plus tags; sidebar is Latest posts only, and is used by single, archive and 404.
 - No `patterns/` directory. The theme's four patterns were dropped in favour of the ones core ships; `functions.php` is now the only PHP file.
+- **Both navigation blocks are `ref`-based**, not inline: header → menu 4 "Navigation", footer → menu 118 "Footer". Those menus are `wp_navigation` posts in the database, so they are not in git and the IDs are specific to this install.
+- `.htaccess` denies `.git` and dotfiles over HTTP; `.gitignore` hides the harness-generated `.claude/projects/-*` symlink.
 - Text domain is `felsqualle`; the directory name is not. There is deliberately no `load_theme_textdomain()` call — WP loads translations just in time.
 
 Templates are near-duplicates of each other by necessity (block templates have no partials beyond template parts and no conditionals). The index/archive/search query loops are largely the same markup; changes to one usually need repeating in the others.
@@ -113,18 +115,22 @@ Blog listings render **full `post-content`**, not excerpts — that is the text-
 - `body { margin: 0 }` plus `useRootPaddingAwareAlignments: false` is what lets the framed groups reach the viewport edge. The narrow-screen inset is re-added selectively in a `max-width: 600px` block.
 - `query-pagination-numbers` sets `midSize: 99` so core renders every page link, then CSS collapses them to `1 2 … 98 99`. This avoids a PHP filter; `paginate_links` cannot produce two links at each end.
 - Navigation never collapses to an overlay — the toggle buttons are hidden and the menu wraps instead.
+- Post meta shows the publish date only, which is what core's `post-date` does by default and what the bundled themes use. The modified date was tried and removed.
+- The separators bracketing a featured image are capped at the image's 400px, and hidden entirely when the post has no image.
 
 ## Known issues
 
 From an initial review. Items 1, 2, 5 and 6 are fixed; 3 and 4 remain.
 
 3. **Reading measure mismatch.** `readme.txt` documents "46rem for prose, 1200px for wide content"; `theme.json` sets `contentSize` *and* `wideSize` to `1200px`. Prose runs full width and `alignwide` is a no-op. Decided fix, not yet made: `"contentSize":"46rem"` on the `post-content` block's constrained layout in the templates, leaving the frames at 1200px.
-4. **`.is-style-summary` is inert.** `block-summary.json` sets only the 2em margins `style.css` already gives every `.wp-block-post-featured-image`. Decided fix, not yet made: move the 400px cap off the blanket rule onto `.is-style-summary`, in `style.css` and `editor.css` both, uncapping single-post featured images.
+4. **`.is-style-summary` is inert.** `block-summary.json` sets only the 1em margins `style.css` already gives every `.wp-block-post-featured-image`. Decided fix, not yet made: move the 400px cap off the blanket rule onto `.is-style-summary`, in `style.css` and `editor.css` both, uncapping single-post featured images. Keep the two margin values in step meanwhile.
 
-Two traps worth keeping, from fixing the rest:
+Traps worth keeping, from fixing the rest:
 
 - **Block style variation CSS is per instance and comes from its own handle.** `block-style-variation-styles` is not a dependency of `felsqualle-style`, so print order against it is not guaranteed, and its selectors score 0,1,0. Duplicating a variation's properties in `style.css` silently defeats `dark.json` — that was the terminal bug.
 - **`'rtl' => 'replace'` swaps the sheet, it does not add to it.** Correct only for a full rtlcss mirror. `style-rtl.css` here is a short overrides file, so it must stay `true`.
+- **An empty navigation menu does not render empty.** Core falls back to the most recent `wp_navigation` post, which resolves to `core/page-list` here — so an emptied menu shows every page. Setting `ref` does not avoid it; the check runs after the ref is resolved. Keep referenced menus non-empty.
+- **`core/post-date` with `displayType: modified` renders nothing** unless the modified date is strictly later than the publish date. It does not fall back to the publish date.
 
 ## Conventions
 
