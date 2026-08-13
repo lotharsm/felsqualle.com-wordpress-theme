@@ -123,8 +123,8 @@ Blog listings render **full `post-content`**, not excerpts — that is the text-
 
 From an initial review. Items 1, 2, 5 and 6 are fixed; 3 and 4 remain.
 
-3. **Reading measure mismatch.** `readme.txt` documents "46rem for prose, 1200px for wide content"; `theme.json` sets `contentSize` *and* `wideSize` to `1200px`. Prose runs full width and `alignwide` is a no-op. Decided fix, not yet made: `"contentSize":"46rem"` on the `post-content` block's constrained layout in the templates, leaving the frames at 1200px.
-4. **`.is-style-summary` is inert.** `block-summary.json` sets only the 1em margins `style.css` already gives every `.wp-block-post-featured-image`. Decided fix, not yet made: move the 400px cap off the blanket rule onto `.is-style-summary`, in `style.css` and `editor.css` both, uncapping single-post featured images. Keep the two margin values in step meanwhile.
+3. **Reading measure mismatch.** `readme.txt` documents "46rem for prose, 1200px for wide content"; `theme.json` sets `contentSize` *and* `wideSize` to `1200px`. Prose runs full width and `alignwide` is a no-op. The previously decided fix — `"contentSize":"46rem"` on the `post-content` block's constrained layout in the templates — was tried and **reverted: it broke the layout**. Do not reapply that fix as-is; re-diagnose before touching this again.
+4. **`.is-style-summary` is inert.** `block-summary.json` sets only the 1em margins `style.css` already gives every `.wp-block-post-featured-image`. The previously decided fix — moving the 400px cap off the blanket rule onto `.is-style-summary` in `style.css` and `editor.css` — was tried alongside item 3 and **reverted: it broke the layout**. Do not reapply that fix as-is; re-diagnose before touching this again.
 
 Traps worth keeping, from fixing the rest:
 
