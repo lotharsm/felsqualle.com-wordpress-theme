@@ -2,7 +2,7 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
-See also [MEMORY.md](.claude/projects/felsqualle.com-wordpress-theme/memory/MEMORY.md) for live-environment facts, conventions, and implementation notes not carried here.
+See also [MEMORY.md](.claude/memory/MEMORY.md) for live-environment facts, conventions, and implementation notes not carried here.
 
 ## What this is
 
@@ -103,7 +103,7 @@ Several partials are near-empty by design (`block-nowrap-first-column.json` has 
 - `parts/` — header, footer, post-meta, sidebar. All four are declared in `theme.json` → `templateParts`; post-meta and sidebar use area `uncategorized`. post-meta is one native `post-date` plus tags; sidebar is Latest posts only, and is used by single, archive and 404.
 - No `patterns/` directory. The theme's four patterns were dropped in favour of the ones core ships; `functions.php` is now the only PHP file.
 - **Both navigation blocks are `ref`-based**, not inline: header → menu 4 "Navigation", footer → menu 118 "Footer". Those menus are `wp_navigation` posts in the database, so they are not in git and the IDs are specific to this install.
-- `.htaccess` denies `.git` and dotfiles over HTTP; `.gitignore` hides the harness-generated `.claude/projects/-*` symlink.
+- `.htaccess` denies `.git` and dotfiles over HTTP. Claude's memory lives at `.claude/memory/MEMORY.md`, tracked in git directly — no symlink involved.
 - `assets/` holds only `css/editor.css`. There is no `languages/` directory and no `.pot`: with the patterns gone the theme has no translatable PHP strings left, so the `translation-ready` tag and `Domain Path` header were dropped too. `Text Domain: felsqualle` stays for any future strings; there is deliberately no `load_theme_textdomain()` call.
 
 Templates are near-duplicates of each other by necessity (block templates have no partials beyond template parts and no conditionals). The index/archive/search query loops are largely the same markup; changes to one usually need repeating in the others.

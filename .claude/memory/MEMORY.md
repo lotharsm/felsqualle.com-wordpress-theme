@@ -4,7 +4,7 @@ Condensed on 2026-08-13 from the separate per-topic notes that used to live
 in this directory (`brevity-in-comments-and-commits.md`, `never-push-to-remote.md`,
 `felsqualle-theme-state.md`, `header-search-button.md` — all now removed,
 folded in below). Facts here supplement the theme's `CLAUDE.md` (at the repo
-root, referenced from here as `../../../../CLAUDE.md`) rather than repeat it —
+root, referenced from here as `../../CLAUDE.md`) rather than repeat it —
 check that file first.
 
 ## Live environment
@@ -28,7 +28,7 @@ check that file first.
 - `.claude/settings.json` holds one-off Bash allowlist entries (tracked in
   git, not ignored — corrects the prior note, which claimed otherwise).
 
-## Commit conventions (see also `../../../../CLAUDE.md` → Conventions, Git workflow)
+## Commit conventions (see also `../../CLAUDE.md` → Conventions, Git workflow)
 
 - All source comments brief — one or two lines, explaining *why*, in every
   file type. Commit messages a single imperative line, body only when the
@@ -48,7 +48,7 @@ supplies geometry only.
   `verticalAlignment:center`):
   `wp:search {"showLabel":false,"placeholder":"Search…","buttonPosition":"button-only","buttonUseIcon":true,"buttonBehavior":"expand-searchfield","isSearchFieldHidden":true,"className":"header-search","fontFamily":"mono"}`
 - `style.css`, mirrored in `assets/css/editor.css` (minus `cursor`, per the
-  three-surface mirroring rule in `../../../../CLAUDE.md`):
+  three-surface mirroring rule in `../../CLAUDE.md`):
   ```css
   .header-search { flex: 0 0 auto; }
   .header-search .wp-block-search__inside-wrapper { align-items: center; }
@@ -87,12 +87,12 @@ supplies geometry only.
 ## Superseded since this note was written (do not act on the old version)
 
 - The "Known issues 3 and 4" the old notes describe as unfixed were cleared
-  from `../../../../CLAUDE.md`'s Known issues section entirely on 2026-08-13,
+  from `../../CLAUDE.md`'s Known issues section entirely on 2026-08-13,
   per explicit user instruction — current code is treated as authoritative
   until issues are manually reassigned. Don't reintroduce that tracking
   speculatively.
 - The `no-title` custom template and its `patterns/site-search.php` companion
   no longer exist — `no-title` was confirmed unused and removed on
   2026-08-13, and the `patterns/` directory was dropped earlier
-  (`../../../../CLAUDE.md`: "the theme's four patterns were dropped in
+  (`../../CLAUDE.md`: "the theme's four patterns were dropped in
   favour of the ones core ships").
