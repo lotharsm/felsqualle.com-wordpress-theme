@@ -84,6 +84,11 @@
 	.editor-styles-wrapper .header-search {
 		flex-basis: 100%;
 	}
+
+	.editor-styles-wrapper .wp-block-group:has(> .header-search) {
+		row-gap: var(--wp--preset--spacing--20);
+		justify-content: flex-start;
+	}
 }
 
 .editor-styles-wrapper .wp-block-navigation .wp-block-navigation__container {

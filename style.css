@@ -462,6 +462,13 @@ article.wp-block-group::after {
 	.header-search {
 		flex-basis: 100%;
 	}
+
+	/* Wrapped, the masthead's 1em block gap becomes vertical space under the
+	   navigation, and space-between has nothing left to spread. */
+	.wp-block-group:has(> .header-search) {
+		row-gap: var(--wp--preset--spacing--20);
+		justify-content: flex-start;
+	}
 }
 
 /* Pagination: mono, centred, hidden when printing. */
