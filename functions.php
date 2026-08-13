@@ -1,7 +1,7 @@
 <?php
 /**
- * Felsqualle — theme functions. Only three things need PHP: the editor
- * stylesheet, the front-end stylesheet and the theme-color meta.
+ * Felsqualle — theme functions. Only two things need PHP: the editor
+ * stylesheet and the front-end stylesheet.
  *
  * @package Felsqualle
  * @since 1.0.0
@@ -41,11 +41,5 @@ add_action( 'wp_enqueue_scripts', 'felsqualle_enqueue_styles', 20 );
 
 /* Core's skip link is left hooked; unhooking it left WCAG 2.4.1 with no mechanism. */
 
-/**
- * Browser chrome colour. WordPress has no native theme-color support.
- */
-function felsqualle_theme_color() {
-	echo '<meta name="theme-color" content="#f0f3f4" media="(prefers-color-scheme: light)" />' . "\n";
-	echo '<meta name="theme-color" content="#171721" media="(prefers-color-scheme: dark)" />' . "\n";
-}
-add_action( 'wp_head', 'felsqualle_theme_color', 1 );
+/* No theme-color meta: style.css declares color-scheme and paints the same
+   base colours, so the browser derives its chrome from the page itself. */
