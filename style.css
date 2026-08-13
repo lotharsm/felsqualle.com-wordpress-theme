@@ -284,17 +284,9 @@ samp,
 	padding: 1em;
 }
 
-/* Block style: terminal panel. */
-.is-style-terminal {
-	background: var(--wp--preset--color--terminal);
-	color: var(--wp--preset--color--base);
-	font-family: var(--wp--preset--font-family--mono);
-	padding: 24px;
-}
-
-.is-style-terminal a {
-	color: var(--wp--preset--color--blossom);
-}
+/* Block style: terminal panel — styles/block-terminal.json paints it. Nothing
+   repeated here: an unconditional "color: base" in this sheet prints after the
+   variation CSS and would override dark.json's correction. */
 
 /* Images never exceed their container. No display or margin is set: core's
    block-library rules position images inside aligned figures, and this
@@ -662,6 +654,13 @@ article.wp-block-group::after {
 
 	/* Inline code sits on the subtle ground, not the terminal ground. */
 	:where(.wp-site-blocks) code:not(.wp-block-code code) {
+		color: var(--wp--preset--color--contrast);
+	}
+
+	/* Terminal panel, same problem. Two classes because the variation CSS
+	   scores 0,1,0 and comes from a handle this sheet does not depend on, so
+	   print order alone cannot be relied on. */
+	.wp-block-group.is-style-terminal {
 		color: var(--wp--preset--color--contrast);
 	}
 }

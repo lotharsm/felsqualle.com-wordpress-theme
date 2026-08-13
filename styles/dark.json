@@ -87,6 +87,15 @@
 					"text": "var:preset|color|contrast"
 				}
 			},
+			"core/group": {
+				"variations": {
+					"terminal": {
+						"color": {
+							"text": "var:preset|color|contrast"
+						}
+					}
+				}
+			},
 			"core/post-title": {
 				"elements": {
 					"link": {

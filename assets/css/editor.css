@@ -189,16 +189,8 @@
 	padding: 1em;
 }
 
-.editor-styles-wrapper .is-style-terminal {
-	background: var(--wp--preset--color--terminal);
-	color: var(--wp--preset--color--base);
-	font-family: var(--wp--preset--font-family--mono);
-	padding: 24px;
-}
-
-.editor-styles-wrapper .is-style-terminal a {
-	color: var(--wp--preset--color--blossom);
-}
+/* No .is-style-terminal rules, matching style.css: block-terminal.json paints
+   the panel, and repeating "color: base" would override the Dark variation. */
 
 .editor-styles-wrapper .wp-block-group.is-style-toc,
 .editor-styles-wrapper .wp-block-list.is-style-toc {
